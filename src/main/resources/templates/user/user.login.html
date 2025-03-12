@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="~{fragment/landing.fragment :: head}"></head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl w-full flex flex-col md:flex-row">
+  <!-- Left Side: Image (Hidden on small screens) -->
+  <div class="hidden md:block md:w-1/2">
+    <img src="/images/login-page-banner.jpg" alt="Healthcare Image"
+         class="w-full h-full object-cover">
+  </div>
+
+  <!-- Right Side: Login Form -->
+  <div class="w-full md:w-1/2 p-8">
+    <h2 class="text-2xl font-bold text-center text-gray-800">Welcome Back</h2>
+    <p class="text-gray-500 text-center mt-2">Login to your account</p>
+
+    <form class="mt-6">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" name="email" required
+               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
+      </div>
+
+      <div class="mt-4">
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="password" name="password" required
+               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
+      </div>
+
+      <div class="flex items-center justify-between mt-4">
+        <label class="flex items-center">
+          <input type="checkbox" class="text-blue-500">
+          <span class="ml-2 text-sm text-gray-600">Remember me</span>
+        </label>
+        <a href="#" class="text-blue-500 text-sm hover:underline">Forgot password?</a>
+      </div>
+
+      <button type="submit"
+              class="mt-6 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+        Login
+      </button>
+    </form>
+
+    <p class="text-center text-sm text-gray-600 mt-4">
+      Don't have an account? <a href="/user/registration" class="text-blue-500 hover:underline">Register here</a>
+    </p>
+  </div>
+
+</div>
+
+</body>
+
+</html>
