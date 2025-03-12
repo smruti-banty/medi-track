@@ -1,5 +1,6 @@
 package edu.rims.medi_track.entity;
 
+import edu.rims.medi_track.constants.Status;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,4 +17,8 @@ public class Doctor extends User {
     @ManyToOne()
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }
