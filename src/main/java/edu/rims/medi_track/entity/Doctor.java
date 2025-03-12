@@ -18,7 +18,10 @@ public class Doctor extends User {
     @Column(name = "experience_years")
     private int experienceYears;
 
-    @ManyToOne()
+    @Column(name = "address", columnDefinition = "text")
+    private String address;
+
+    @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
 
