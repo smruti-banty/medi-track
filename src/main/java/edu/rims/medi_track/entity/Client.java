@@ -9,7 +9,9 @@ import jakarta.persistence.Table;
 @Table(name = "client")
 @PrimaryKeyJoinColumn(name = "id")
 public class Client extends User {
-    // Add specific fields if needed
     @Column(name = "contact_number")
     private String contactNumber;
+
+    @Column(name = "address", columnDefinition = "text")
+    private String address;
 }
