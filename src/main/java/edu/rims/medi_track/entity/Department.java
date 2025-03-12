@@ -2,10 +2,15 @@ package edu.rims.medi_track.entity;
 
 import edu.rims.medi_track.constants.Status;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
+@Table(name = "table")
+@Getter
+@Setter
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

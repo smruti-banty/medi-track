@@ -2,11 +2,15 @@ package edu.rims.medi_track.entity;
 
 import edu.rims.medi_track.constants.UserRole;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "user_type")
 @Table(name = "user")
+@Getter
+@Setter
 public class User {
 
     @Id

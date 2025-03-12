@@ -2,10 +2,14 @@ package edu.rims.medi_track.entity;
 
 import edu.rims.medi_track.constants.Status;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "doctor")
 @PrimaryKeyJoinColumn(name = "id")
+@Getter
+@Setter
 public class Doctor extends User {
 
     @Column(name = "license_number")
