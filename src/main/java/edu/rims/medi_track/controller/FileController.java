@@ -15,7 +15,7 @@ public class FileController {
 
     @GetMapping(path = "/image/{id}",
             produces = {"image/jpg", "image/png", "image/jpeg"})
-    byte[] getImage(@PathVariable String uploadId) {
+    byte[] getImage(@PathVariable("id") String uploadId) {
         return fileService.getFileContent(uploadId);
     }
 }

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<th:block th:fragment="doctorContent">
+    <div class="flex justify-between items-center mb-6">
+        <!-- Title -->
+        <h3 class="text-2xl font-semibold text-blue-900">Find Your Doctor</h3>
+
+        <!-- Search Box -->
+        <div class="relative">
+            <form action="" method="get">
+                <input type="text" placeholder="Search by name"
+                       class="w-72 px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500">
+                    🔍
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Doctor Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+        <!-- Doctor Card 1 -->
+        <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+            <img src="/images/doctor1.jpg" alt="Dr. John Doe"
+                 class="w-24 h-24 rounded-full border-2 border-blue-500 mb-3">
+            <h4 class="text-lg font-semibold text-gray-700">Dr. John Doe</h4>
+            <p class="text-gray-500 text-sm">New York, USA</p>
+            <p class="text-blue-700 font-medium">Cardiologist</p>
+            <div class="mt-4 space-x-2">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">Schedule
+                    Appointment
+                </button>
+                <button class="border border-blue-500 text-blue-500 px-4 py-2 rounded-lg text-sm hover:bg-blue-100">View
+                    Details
+                </button>
+            </div>
+        </div>
+
+        <!-- Doctor Card 2 -->
+        <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+            <img src="/images/doctor2.jpg" alt="Dr. Emily Smith"
+                 class="w-24 h-24 rounded-full border-2 border-blue-500 mb-3">
+            <h4 class="text-lg font-semibold text-gray-700">Dr. Emily Smith</h4>
+            <p class="text-gray-500 text-sm">Los Angeles, USA</p>
+            <p class="text-blue-700 font-medium">Dermatologist</p>
+            <div class="mt-4 space-x-2">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">Schedule
+                    Appointment
+                </button>
+                <button class="border border-blue-500 text-blue-500 px-4 py-2 rounded-lg text-sm hover:bg-blue-100">View
+                    Details
+                </button>
+            </div>
+        </div>
+
+        <!-- Doctor Card 3 -->
+        <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+            <img src="/images/doctor3.jpg" alt="Dr. Michael Brown"
+                 class="w-24 h-24 rounded-full border-2 border-blue-500 mb-3">
+            <h4 class="text-lg font-semibold text-gray-700">Dr. Michael Brown</h4>
+            <p class="text-gray-500 text-sm">Chicago, USA</p>
+            <p class="text-blue-700 font-medium">Orthopedic</p>
+            <div class="mt-4 space-x-2">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">Schedule
+                    Appointment
+                </button>
+                <button class="border border-blue-500 text-blue-500 px-4 py-2 rounded-lg text-sm hover:bg-blue-100">View
+                    Details
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Pagination Centered -->
+    <div class="flex justify-center mt-6">
+        <nav class="flex items-center space-x-2">
+            <button class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Prev</button>
+            <button class="px-3 py-2 bg-blue-500 text-white rounded-md">1</button>
+            <button class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">2</button>
+            <button class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">3</button>
+            <button class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Next</button>
+        </nav>
+    </div>
+</th:block>
+</body>
+</html>

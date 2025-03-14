@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<th:block th:fragment="dashboardContent">
+    <!-- Title -->
+    <h3 class="text-2xl font-semibold text-blue-900 mb-4">Client Dashboard Overview</h3>
+
+    <!-- Cards Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- Upcoming Appointments -->
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+            <div class="flex-shrink-0">
+                <i class="fas fa-calendar-check text-blue-600 text-3xl"></i>
+            </div>
+            <div class="ml-4">
+                <h4 class="text-lg font-semibold text-gray-700">Upcoming Appointments</h4>
+                <p class="text-2xl font-bold text-blue-800">5</p>
+            </div>
+        </div>
+
+        <!-- Completed Appointments -->
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+            <div class="flex-shrink-0">
+                <i class="fas fa-check-circle text-green-600 text-3xl"></i>
+            </div>
+            <div class="ml-4">
+                <h4 class="text-lg font-semibold text-gray-700">Completed Appointments</h4>
+                <p class="text-2xl font-bold text-green-800">12</p>
+            </div>
+        </div>
+
+        <!-- Canceled Appointments -->
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+            <div class="flex-shrink-0">
+                <i class="fas fa-times-circle text-red-600 text-3xl"></i>
+            </div>
+            <div class="ml-4">
+                <h4 class="text-lg font-semibold text-gray-700">Canceled Appointments</h4>
+                <p class="text-2xl font-bold text-red-800">3</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activities & Specialist Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Last 5 Activities -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h4 class="text-lg font-semibold text-gray-700 mb-4">Last 5 Activities</h4>
+            <ul class="space-y-3">
+                <li class="flex items-center">
+                    <i class="fas fa-notes-medical text-blue-500"></i>
+                    <span class="ml-3">Booked an appointment with Dr. Smith</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-calendar-check text-green-500"></i>
+                    <span class="ml-3">Completed a health check-up</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-user-md text-blue-500"></i>
+                    <span class="ml-3">Consulted with a cardiologist</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-calendar-alt text-yellow-500"></i>
+                    <span class="ml-3">Rescheduled an appointment</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-comments text-gray-500"></i>
+                    <span class="ml-3">Left feedback on a consultation</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Our Specialist Consultants -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h4 class="text-lg font-semibold text-gray-700 mb-4">Our Specialist Consultants</h4>
+            <div class="space-y-4">
+                <div class="flex items-center">
+                    <img src="/images/doctor1.jpg" alt="Dr. John Doe" class="w-12 h-12 rounded-full">
+                    <div class="ml-4">
+                        <h5 class="text-md font-semibold">Dr. John Doe</h5>
+                        <p class="text-sm text-gray-500">Cardiologist</p>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <img src="/images/doctor2.jpg" alt="Dr. Emily Smith" class="w-12 h-12 rounded-full">
+                    <div class="ml-4">
+                        <h5 class="text-md font-semibold">Dr. Emily Smith</h5>
+                        <p class="text-sm text-gray-500">Dermatologist</p>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <img src="/images/doctor3.jpg" alt="Dr. Michael Brown" class="w-12 h-12 rounded-full">
+                    <div class="ml-4">
+                        <h5 class="text-md font-semibold">Dr. Michael Brown</h5>
+                        <p class="text-sm text-gray-500">Orthopedic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</th:block>
+</body>
+</html>
