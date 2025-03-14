@@ -1,17 +1,25 @@
 package edu.rims.medi_track.controller;
 
+import edu.rims.medi_track.dto.UserRegistrationDTO;
+import edu.rims.medi_track.service.UserService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
+    @Value("#{T(String).format('redirect:%s', '${user.page.url}%s')}")
+    private String USER_BASE_URL;
+
     @Value("${frontend.user.page}")
     private String FRONTPAGE_PREFIX;
+
+    private final UserService userService;
 
     @GetMapping("/login")
     String loginPage() {
@@ -19,7 +27,18 @@ public class UserController {
     }
 
     @GetMapping("/registration")
-    String registrationPage() {
+    String registrationPage(@RequestParam(required = false) String message, Model model) {
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
+
         return String.format(FRONTPAGE_PREFIX, "registration");
+    }
+
+    @PostMapping("/registration")
+    public String registerUser(@ModelAttribute UserRegistrationDTO userDTO) {
+        userService.registerUser(userDTO);
+        String message = "Registration successful!";
+        return String.format(USER_BASE_URL, "/registration?message=" + message);
     }
 }

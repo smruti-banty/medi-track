@@ -11,102 +11,104 @@
     </a>
   </div>
 
-
   <h2 class="text-2xl font-bold text-center text-gray-800">Create an Account</h2>
   <p class="text-gray-500 text-center mt-2">Register as a Client or Doctor</p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-    <!-- Left Column: Profile Picture Upload -->
-    <div class="flex flex-col items-center">
-      <div id="dropArea"
-           class="w-48 h-48 flex flex-col justify-center items-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer text-gray-600"
-           ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-        <img id="imagePreview" src="" class="hidden w-full h-full object-cover rounded-lg" />
-        <span id="uploadText" class="text-sm text-gray-500">Drag & Drop or Click to Upload</span>
-      </div>
-      <input type="file" id="profilePicture" name="profilePicture" accept="image/*" class="hidden"
-             onchange="previewImage(event)">
-      <button onclick="document.getElementById('profilePicture').click()"
-              class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-        Upload Profile Picture
-      </button>
-    </div>
+  <div class="mt-6">
+    <!-- Registration Form with Grid Layout -->
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full" action="/user/registration" method="post" enctype="multipart/form-data">
 
-    <!-- Right Column: Registration Form -->
-    <form class="space-y-3 w-full">
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-        <input type="text" id="name" name="name" required
-               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
-      </div>
+      <!-- Left Column -->
+      <div class="space-y-4">
+        <!-- Profile Picture Upload Inside Form -->
+        <div class="flex flex-col items-center">
+          <label class="block text-sm font-medium text-gray-700">Profile Picture</label>
+          <div id="dropArea"
+               class="w-48 h-48 flex flex-col justify-center items-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer text-gray-600"
+               ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+            <img id="imagePreview" src="" class="hidden w-full h-full object-cover rounded-lg" />
+            <span id="uploadText" class="text-sm text-gray-500">Drag & Drop or Click to Upload</span>
+          </div>
+          <input type="file" id="file" name="file" accept="image/*" class="hidden" onchange="previewImage(event)">
+          <button type="button" onclick="document.getElementById('file').click()"
+                  class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+            Upload Profile Picture
+          </button>
+        </div>
 
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-        <input type="email" id="email" name="email" required
-               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
-      </div>
-
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-        <input type="password" id="password" name="password" required
-               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
-      </div>
-
-      <div>
-        <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
-        <input type="number" id="age" name="age" required
-               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
-      </div>
-
-      <div>
-        <label for="userRole" class="block text-sm font-medium text-gray-700">Register As</label>
-        <select id="userRole" name="userRole" onchange="toggleFields()" required
-                class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
-          <option value="CLIENT">Client</option>
-          <option value="DOCTOR">Doctor</option>
-        </select>
-      </div>
-
-      <!-- Doctor-Specific Fields (Hidden by Default) -->
-      <div id="doctorFields" class="hidden">
         <div>
-          <label for="licenseNumber" class="block text-sm font-medium text-gray-700">License Number</label>
-          <input type="text" id="licenseNumber" name="licenseNumber"
+          <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input type="text" id="name" name="name" required
                  class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
         </div>
 
         <div>
-          <label for="experienceYears" class="block text-sm font-medium text-gray-700">Years of Experience</label>
-          <input type="number" id="experienceYears" name="experienceYears"
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" name="email" required
                  class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
         </div>
 
         <div>
-          <label for="department" class="block text-sm font-medium text-gray-700">Department</label>
-          <input type="text" id="department" name="department"
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" name="password" required
                  class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
         </div>
       </div>
 
-      <!-- Client-Specific Fields -->
-      <div>
-        <label for="contactNumber" class="block text-sm font-medium text-gray-700">Contact Number</label>
-        <input type="text" id="contactNumber" name="contactNumber" required
-               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
-      </div>
+      <!-- Right Column -->
+      <div class="space-y-4">
+        <div>
+          <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+          <input type="number" id="age" name="age" required
+                 class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
+        </div>
 
-      <div>
-        <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-        <textarea id="address" name="address" rows="3" required
-                  class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none"></textarea>
-      </div>
+        <div>
+          <label for="userRole" class="block text-sm font-medium text-gray-700">Register As</label>
+          <select id="userRole" name="userRole" onchange="toggleFields()" required
+                  class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
+            <option value="CLIENT">Client</option>
+            <option value="DOCTOR">Doctor</option>
+          </select>
+        </div>
 
-      <button type="submit"
-              class="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-        Register
-      </button>
+        <!-- Doctor-Specific Fields -->
+        <div id="doctorFields" class="hidden space-y-4">
+          <div>
+            <label for="licenseNumber" class="block text-sm font-medium text-gray-700">License Number</label>
+            <input type="text" id="licenseNumber" name="licenseNumber"
+                   class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
+          </div>
+
+          <div>
+            <label for="experienceYears" class="block text-sm font-medium text-gray-700">Years of Experience</label>
+            <input type="number" id="experienceYears" name="experienceYears"
+                   class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
+          </div>
+        </div>
+
+        <!-- Client-Specific Fields -->
+        <div>
+          <label for="contactNumber" class="block text-sm font-medium text-gray-700">Contact Number</label>
+          <input type="text" id="contactNumber" name="contactNumber" required
+                 class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
+        </div>
+
+        <div>
+          <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+          <textarea id="address" name="address" rows="3" required
+                    class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none"></textarea>
+        </div>
+
+        <button type="submit"
+                class="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+          Register
+        </button>
+        <input type="hidden" data-th-name="${_csrf.parameterName}" data-th-value="${_csrf.token}">
+      </div>
     </form>
   </div>
+
 
   <p class="text-center text-sm text-gray-600 mt-4">
     Already have an account? <a href="/user/login" class="text-blue-500 hover:underline">Login here</a>
