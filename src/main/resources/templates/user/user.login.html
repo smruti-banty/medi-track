@@ -15,12 +15,15 @@
   <div class="w-full md:w-1/2 p-8">
     <h2 class="text-2xl font-bold text-center text-gray-800">Welcome Back</h2>
     <p class="text-gray-500 text-center mt-2">Login to your account</p>
-
-    <form class="mt-6">
+    <p data-th-if="${param.error != null}"
+       class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md text-sm font-medium mt-2">
+      ❌ Wrong username or password. Please try again.
+    </p>
+    <form class="mt-6" action="/user/login" method="post">
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-        <input type="email" id="email" name="email" required
-               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none">
+        <input type="email" id="email" name="username" required
+               class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 outline-none" autofocus>
       </div>
 
       <div class="mt-4">
@@ -41,6 +44,9 @@
               class="mt-6 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
         Login
       </button>
+
+      <input type="hidden" data-th-name="${_csrf.parameterName}" data-th-value="${_csrf.token}">
+
     </form>
 
     <p class="text-center text-sm text-gray-600 mt-4">

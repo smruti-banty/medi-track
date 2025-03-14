@@ -19,7 +19,7 @@
             </div>
 
             <!-- Login Button -->
-            <a href="/user/login" class="hidden md:block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Login</a>
+            <a href="/user/login" class="hidden md:block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" data-sec-authorize="!isAuthenticated()">Login</a>
 
             <!-- Mobile Menu Button -->
             <button id="menu-btn" class="md:hidden focus:outline-none">
@@ -36,7 +36,7 @@
         <a href="#features" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Features</a>
         <a href="#services" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Services</a>
         <a href="#contact-us" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
-        <a href="/user/login" class="block px-4 py-2 bg-blue-500 text-white text-center hover:bg-blue-600">Login</a>
+        <a href="/user/login" class="block px-4 py-2 bg-blue-500 text-white text-center hover:bg-blue-600" data-sec-authorize="!isAuthenticated()">Login</a>
     </div>
 </nav>
 

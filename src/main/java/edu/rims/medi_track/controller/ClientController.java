@@ -11,7 +11,7 @@ public class ClientController {
     @Value("${frontend.client.page}")
     private String FRONTEND_PREFIX;
 
-    @GetMapping({"/home", "/", ""})
+    @GetMapping({"/dashboard", "/", ""})
     String homePage() {
         return String.format(FRONTEND_PREFIX, "home");
     }
