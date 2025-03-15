@@ -16,7 +16,10 @@ public class Doctor extends User {
     private String licenseNumber;
 
     @Column(name = "experience_years")
-    private int experienceYears;
+    private Integer experienceYears;
+
+    @Column(name = "hourly_rate")
+    private Double hourlyRate;
 
     @Column(name = "address", columnDefinition = "text")
     private String address;

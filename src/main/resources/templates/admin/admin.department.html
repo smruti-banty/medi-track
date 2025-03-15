@@ -24,7 +24,7 @@
         </h2>
 
         <!-- Department Form -->
-        <form action="/department/add" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form action="/admin/create/department" method="POST" enctype="multipart/form-data" class="space-y-4">
             <input type="hidden" name="_csrf" data-th-value="${_csrf.token}">
 
             <!-- Department Name -->
@@ -37,14 +37,14 @@
             <!-- Description -->
             <div>
                 <label class="text-gray-600 font-medium">Description</label>
-                <textarea name="description" required rows="3"
+                <textarea name="departmentDescription" required rows="3"
                           class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 focus:outline-none"></textarea>
             </div>
 
             <!-- Upload Image -->
             <div>
                 <label class="text-gray-600 font-medium">Upload Image</label>
-                <input type="file" id="departmentImageInput" name="image" accept="image/*"
+                <input type="file" id="departmentImageInput" name="file" accept="image/*"
                        onchange="previewDepartmentImage(event)"
                        class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300 focus:outline-none">
 
@@ -58,6 +58,7 @@
                 </div>
             </div>
 
+            <input type="hidden" name="departmentId">
             <!-- Submit Button -->
             <div class="flex justify-end space-x-2">
                 <button type="button" onclick="closeModal()" class="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500">

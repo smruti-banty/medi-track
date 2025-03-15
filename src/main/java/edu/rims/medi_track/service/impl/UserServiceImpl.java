@@ -1,21 +1,22 @@
 package edu.rims.medi_track.service.impl;
 
-import edu.rims.medi_track.entity.User;
+import edu.rims.medi_track.dto.AdminRegistrationDTO;
+import edu.rims.medi_track.entity.*;
 import edu.rims.medi_track.repository.DepartmentRepository;
 import edu.rims.medi_track.service.FileService;
 import edu.rims.medi_track.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 import edu.rims.medi_track.constants.UserRole;
 import edu.rims.medi_track.dto.UserRegistrationDTO;
-import edu.rims.medi_track.entity.Client;
-import edu.rims.medi_track.entity.Department;
-import edu.rims.medi_track.entity.Doctor;
 import edu.rims.medi_track.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,8 +46,41 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void registerAdmin(AdminRegistrationDTO dto) {
+        var admin = new Admin();
+
+        admin.setUserRole(UserRole.ADMIN);
+        admin.setName(dto.name());
+        admin.setEmail(dto.email());
+        admin.setPassword(passwordEncoder.encode(dto.password()));
+        admin.setAge(dto.age());
+
+        userRepository.save(admin);
+    }
+
+    @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow();
+    }
+
+    @Override
+    public Page<User> getUsersByRole(UserRole role, Pageable pageable) {
+        return userRepository.findByUserRole(role, pageable);
+    }
+
+    @Override
+    public long doctors() {
+        return userRepository.countAllByUserRole(UserRole.DOCTOR);
+    }
+
+    @Override
+    public long clients() {
+        return userRepository.countAllByUserRole(UserRole.CLIENT);
+    }
+
+    @Override
+    public List<User> getLast5Users() {
+        return userRepository.findTop5ByOrderByCreatedDateDesc();
     }
 
     private User createDoctor(UserRegistrationDTO userDTO) {
@@ -59,6 +93,7 @@ public class UserServiceImpl implements UserService {
         doctor.setAddress(userDTO.getAddress());
         doctor.setLicenseNumber(userDTO.getLicenseNumber());
         doctor.setExperienceYears(userDTO.getExperienceYears());
+        doctor.setHourlyRate(userDTO.getHourlyRate());
 
         if (userDTO.getDepartmentId() != null) {
             Optional<Department> department = departmentRepository.findById(userDTO.getDepartmentId());

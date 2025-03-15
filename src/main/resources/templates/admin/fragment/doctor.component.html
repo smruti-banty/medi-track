@@ -30,36 +30,38 @@
                 </thead>
                 <tbody class="text-gray-600 text-sm">
                 <!-- Doctor Row -->
-                <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer" onclick="toggleAccordion(this)">
-                    <td class="py-3 px-6 text-left flex items-center">
-                        <img class="w-10 h-10 rounded-full mr-2" src="https://via.placeholder.com/40" alt="Doctor">
-                        <span>Dr. John Doe</span>
-                    </td>
-                    <td class="py-3 px-6 text-left">john.doe@example.com</td>
-                    <td class="py-3 px-6 text-left">Cardiology</td>
-                    <td class="py-3 px-6 text-left">12 Years</td>
-                    <td class="py-3 px-6 text-left">$150/hr</td>
-                </tr>
-                <!-- Accordion Row -->
-                <tr class="hidden">
-                    <td colspan="6" class="p-4 bg-gray-50">
-                        <div class="grid grid-cols-3 gap-4">
-                            <div>
-                                <p><strong>Age:</strong> 45</p>
-                                <p><strong>License Number:</strong> LIC-123456</p>
+                <th:block data-th-each="doctor : ${doctors}">
+                    <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer" onclick="toggleAccordion(this)">
+                        <td class="py-3 px-6 text-left flex items-center">
+                            <img class="w-10 h-10 rounded-full mr-2" data-th-src="|/file/images/${doctor.id}|" alt="Doctor">
+                            <span data-th-text="${doctor.name}"></span>
+                        </td>
+                        <td class="py-3 px-6 text-left" data-th-text="${doctor.email}"></td>
+                        <td class="py-3 px-6 text-left"
+                            data-th-text="${doctor.department != null ? doctor.department.departmentName : ''}"></td>
+                        <td class="py-3 px-6 text-left" data-th-text="|${doctor.experienceYears} Years|"></td>
+                        <td class="py-3 px-6 text-left" data-th-text="|&#8377;${doctor.hourlyRate}/hr|"></td>
+                    </tr>
+                    <!-- Accordion Row -->
+                    <tr class="hidden">
+                        <td colspan="6" class="p-4 bg-gray-50">
+                            <div class="grid grid-cols-3 gap-4">
+                                <div>
+                                    <p><strong>Age:</strong> <span data-th-text="${doctor.age}"></span></p>
+                                    <p><strong>License Number:</strong> <span data-th-text="${doctor.licenseNumber}"></span></p>
+                                </div>
+                                <div>
+                                    <p><strong>Specialization:</strong> <span data-th-text="${doctor.department != null ? doctor.department.departmentName : ''}"></span></p>
+                                    <p><strong>Email:</strong> <span data-th-text="${doctor.email}"></span></p>
+                                </div>
+                                <div>
+                                    <p><strong>Hourly Rate:</strong> <span data-th-text="|&#8377;${doctor.hourlyRate}/hr|"></span></p>
+                                    <p><strong>Experience:</strong> <span data-th-text="|${doctor.experienceYears} Years|"></span></p>
+                                </div>
                             </div>
-                            <div>
-                                <p><strong>Specialization:</strong> Cardiology</p>
-                                <p><strong>Email:</strong> john.doe@example.com</p>
-                            </div>
-                            <div>
-                                <p><strong>Hourly Rate:</strong> $150/hr</p>
-                                <p><strong>Experience:</strong> 12 Years</p>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- More Doctors Dynamically Rendered -->
+                        </td>
+                    </tr>
+                </th:block>
                 </tbody>
             </table>
         </div>
@@ -70,9 +72,12 @@
                 <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
                     <i class="fas fa-angle-left"></i>
                 </button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">1</button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">2</button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">3</button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">1
+                </button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">2
+                </button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">3
+                </button>
                 <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
                     <i class="fas fa-angle-right"></i>
                 </button>

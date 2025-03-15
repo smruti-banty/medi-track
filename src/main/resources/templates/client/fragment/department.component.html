@@ -25,43 +25,11 @@
         <!-- Departments Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Department Card (Example) -->
-            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between hover:shadow-lg transition">
-                <img src="/images/cardiology.png" alt="Cardiology" class="w-16 h-16 mx-auto mb-4">
-                <h4 class="text-lg font-semibold text-gray-700">Cardiology</h4>
-                <p class="text-gray-600 text-sm mt-2 flex-1">
-                    Specializing in heart-related treatments, surgeries, and preventive care.
-                </p>
-                <a href="/departments/cardiology"
-                   class="block mt-4 text-blue-500 font-semibold hover:underline text-center border-t pt-2">View Doctors</a>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between hover:shadow-lg transition">
-                <img src="/images/neurology.png" alt="Neurology" class="w-16 h-16 mx-auto mb-4">
-                <h4 class="text-lg font-semibold text-gray-700">Neurology</h4>
-                <p class="text-gray-600 text-sm mt-2 flex-1">
-                    Diagnosis & treatment of brain & nervous system disorders.
-                </p>
-                <a href="/departments/neurology"
-                   class="block mt-4 text-blue-500 font-semibold hover:underline text-center border-t pt-2">View Doctors</a>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between hover:shadow-lg transition">
-                <img src="/images/orthopedics.png" alt="Orthopedics" class="w-16 h-16 mx-auto mb-4">
-                <h4 class="text-lg font-semibold text-gray-700">Orthopedics</h4>
-                <p class="text-gray-600 text-sm mt-2 flex-1">
-                    Specializing in bone & joint care, including fractures & arthritis.
-                </p>
-                <a href="/departments/orthopedics"
-                   class="block mt-4 text-blue-500 font-semibold hover:underline text-center border-t pt-2">View Doctors</a>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between hover:shadow-lg transition">
-                <img src="/images/dermatology.png" alt="Dermatology" class="w-16 h-16 mx-auto mb-4">
-                <h4 class="text-lg font-semibold text-gray-700">Dermatology</h4>
-                <p class="text-gray-600 text-sm mt-2 flex-1">
-                    Skin, hair, and nail treatments for various conditions.
-                </p>
-                <a href="/departments/dermatology"
+            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between hover:shadow-lg transition" data-th-each="department : ${departments}">
+                <img data-th-src="|/file/images/${department.id}|" alt="Cardiology" class="w-16 h-16 mx-auto mb-4">
+                <h4 class="text-lg font-semibold text-gray-700" data-th-text="${department.departmentName}"></h4>
+                <p class="text-gray-600 text-sm mt-2 flex-1" data-th-text="${department.departmentDescription}"></p>
+                <a href="#"
                    class="block mt-4 text-blue-500 font-semibold hover:underline text-center border-t pt-2">View Doctors</a>
             </div>
         </div>

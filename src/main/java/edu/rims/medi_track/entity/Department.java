@@ -14,16 +14,19 @@ import java.util.List;
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "department_id")
     private String id;
 
     @Column(name = "department_name", unique = true, nullable = false)
     private String departmentName;
+
+    @Column(name = "department_description", columnDefinition = "TEXT")
+    private String departmentDescription;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     List<Doctor> doctors;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.ACTIVE;
 }
