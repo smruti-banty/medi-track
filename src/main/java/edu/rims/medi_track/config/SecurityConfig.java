@@ -43,14 +43,13 @@ public class SecurityConfig {
     UserDetailsService detailsService() {
         return (username) -> {
             var user = userRepository.findByEmail(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("userNotFound"));
+                    .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
             return org.springframework.security.core.userdetails.User.builder()
                     .username(username)
                     .password(user.getPassword())
                     .roles(user.getUserRole().toString())
                     .build();
         };
-
     }
 
 }

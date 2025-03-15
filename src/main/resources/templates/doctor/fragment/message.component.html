@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block data-th-fragment="messageContent">
+    <div class="p-6 bg-gray-100 min-h-screen">
+        <!-- Notification Cards Container -->
+        <div class="space-y-4">
+            <!-- Single Notification Card -->
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-between hover:shadow-lg">
+                <!-- Icon -->
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-semibold text-gray-800">Appointment Confirmed</h4>
+                        <p class="text-sm text-gray-500">Your appointment with Smith is confirmed for March 20, 2025.</p>
+                        <span class="text-xs text-gray-400">10 minutes ago</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-4">
+                    <button title="Mark as Read" class="text-blue-500 text-xl hover:text-blue-600">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button title="Delete Notification" class="text-red-500 text-xl hover:text-red-600">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Repeat Notifications Dynamically -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-6 flex justify-center">
+            <button class="px-4 py-2 bg-gray-300 rounded-l hover:bg-gray-400">«</button>
+            <button class="px-4 py-2 bg-blue-600 text-white">1</button>
+            <button class="px-4 py-2 bg-gray-300 hover:bg-gray-400">2</button>
+            <button class="px-4 py-2 bg-gray-300 hover:bg-gray-400">3</button>
+            <button class="px-4 py-2 bg-gray-300 rounded-r hover:bg-gray-400">»</button>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+</html>

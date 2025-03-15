@@ -8,8 +8,89 @@
     <link data-th-replace="~{fragment/common :: commonLinks}">
 
     <script data-th-replace="~{fragment/common :: commonScripts}"></script>
-</head>
-<body>
 
+    <script src="/script/active.link.js"></script>
+</head>
+<body class="bg-gray-100">
+
+<th:block data-th-fragment="adminTemplate(content, icon, title)">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-blue-900 text-white p-5 space-y-6">
+            <h2 class="text-2xl font-bold text-center">Admin Panel</h2>
+            <nav>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="/admin/dashboard"
+                           class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-blue-700">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/departments"
+                           class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-blue-700">
+                            <i class="fas fa-building"></i>
+                            <span>Departments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/appointments"
+                           class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-blue-700">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Appointments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/doctors"
+                           class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-blue-700">
+                            <i class="fas fa-user-md"></i>
+                            <span>Doctors</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/patients"
+                           class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-blue-700">
+                            <i class="fas fa-user-injured"></i>
+                            <span>Patients</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/create" class="flex items-center space-x-2 py-2 px-3 rounded hover:bg-blue-700">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Create Admin</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <!-- Title with Icon -->
+                <div class="flex items-center space-x-2">
+                    <i data-th-class="|${icon} text-blue-600|"></i>
+                    <h2 class="text-xl font-semibold text-gray-700" data-th-text="${title}"></h2>
+                </div>
+
+                <!-- Logout Form -->
+                <form action="/logout" method="post">
+                    <input type="hidden" name="_csrf" data-th-value="${_csrf.token}">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded flex items-center space-x-2">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </header>
+
+            <!-- Page Content -->
+            <main class="flex-1 p-6">
+                <th:block th:replace="${content}"></th:block>
+            </main>
+        </div>
+    </div>
+</th:block>
 </body>
 </html>

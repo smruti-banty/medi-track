@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block data-th-fragment="profileContent">
+    <div class="p-6 bg-gray-100  flex justify-center">
+        <!-- Profile Card -->
+        <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
+            <!-- Profile Picture -->
+            <div class="flex flex-col items-center mb-6">
+                <label for="profilePic" class="cursor-pointer relative">
+                    <img id="profilePreview" data-th-src="|/file/images/${doctorId}|" alt="Profile Picture"
+                         class="w-28 h-28 rounded-full border-2 border-gray-300">
+                    <span class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full">
+                    <i class="fas fa-camera"></i>
+                </span>
+                </label>
+                <input type="file" id="profilePic" class="hidden" accept="image/*"
+                       data-th-data-id="${doctorId}"
+                       data-th-data-token="${_csrf.token}"
+                       onchange="previewImage(event)">
+            </div>
+
+            <!-- Non-Editable Information -->
+            <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                <h3 class="text-xl font-semibold text-gray-800 text-center">Dr. John Doe</h3>
+                <p class="text-gray-600 text-sm text-center">johndoe@example.com</p>
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <p class="text-gray-600 text-sm">Specialization</p>
+                        <p class="font-medium text-gray-800">Cardiologist</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 text-sm">License Number</p>
+                        <p class="font-medium text-gray-800">MD-123456</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editable Information -->
+            <form>
+                <!-- Hourly Rate -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2">Hourly Rate ($)</label>
+                    <input type="number" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           placeholder="Enter hourly rate">
+                </div>
+
+                <!-- Age & Experience -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Age</label>
+                        <input type="number"
+                               class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="Enter age">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Experience (Years)</label>
+                        <input type="number"
+                               class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="Enter experience in years">
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2">Address</label>
+                    <textarea class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              placeholder="Enter your address"></textarea>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex justify-between">
+                    <button type="button"
+                            class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400">Cancel</button>
+                    <button type="submit"
+                            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block data-th-fragment="departmentContent">
+    <div class="p-6 bg-gray-100">
+        <!-- Page Header -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 flex items-center space-x-2">
+                <i class="fas fa-hospital text-blue-600"></i>
+                <span>Departments</span>
+            </h2>
+            <button class="bg-blue-600 text-white px-4 py-2 rounded flex items-center space-x-2" onclick="openModal()">
+                <i class="fas fa-plus"></i>
+                <span>Add Department</span>
+            </button>
+        </div>
+
+        <!-- Department Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Single Department Card -->
+            <div class="bg-white rounded-lg shadow p-4 flex flex-col">
+                <img src="https://via.placeholder.com/300" alt="Department Image" class="w-full h-40 object-cover rounded">
+                <div class="mt-4 flex-grow">
+                    <h3 class="text-lg font-semibold text-gray-700">Cardiology</h3>
+                    <p class="text-sm text-gray-500 mt-2">
+                        Specializes in diagnosing and treating heart-related conditions.
+                    </p>
+                </div>
+                <!-- Action Buttons -->
+                <div class="flex justify-between mt-4">
+                    <button class="text-blue-600 flex items-center space-x-1">
+                        <i class="fas fa-edit"></i>
+                        <span class="text-sm">Update</span>
+                    </button>
+                    <button class="text-red-600 flex items-center space-x-1">
+                        <i class="fas fa-trash"></i>
+                        <span class="text-sm">Delete</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- More Department Cards (Repeat as needed) -->
+            <div class="bg-white rounded-lg shadow p-4 flex flex-col">
+                <img src="https://via.placeholder.com/300" alt="Department Image" class="w-full h-40 object-cover rounded">
+                <div class="mt-4 flex-grow">
+                    <h3 class="text-lg font-semibold text-gray-700">Neurology</h3>
+                    <p class="text-sm text-gray-500 mt-2">
+                        Focuses on disorders of the nervous system and brain treatments.
+                    </p>
+                </div>
+                <div class="flex justify-between mt-4">
+                    <button class="text-blue-600 flex items-center space-x-1">
+                        <i class="fas fa-edit"></i>
+                        <span class="text-sm">Update</span>
+                    </button>
+                    <button class="text-red-600 flex items-center space-x-1">
+                        <i class="fas fa-trash"></i>
+                        <span class="text-sm">Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-6">
+            <nav class="flex space-x-2">
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-angle-left"></i>
+                </button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">1</button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">2</button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">3</button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-angle-right"></i>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+</html>
