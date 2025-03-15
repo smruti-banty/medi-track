@@ -1,6 +1,7 @@
 package edu.rims.medi_track.controller;
 
 import edu.rims.medi_track.dto.UserRegistrationDTO;
+import edu.rims.medi_track.service.DepartmentService;
 import edu.rims.medi_track.service.UserService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,8 @@ public class UserController {
 
     private final UserService userService;
 
+    private final DepartmentService departmentService;
+
     @GetMapping("/login")
     String loginPage() {
         return String.format(FRONTPAGE_PREFIX, "login");
@@ -31,7 +34,7 @@ public class UserController {
         if (message != null) {
             model.addAttribute("message", message);
         }
-
+        model.addAttribute("departments", departmentService.getDepartments());
         return String.format(FRONTPAGE_PREFIX, "registration");
     }
 

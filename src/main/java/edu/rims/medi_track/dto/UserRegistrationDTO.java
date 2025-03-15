@@ -18,6 +18,7 @@ public class UserRegistrationDTO {
     private String licenseNumber;
     private Integer experienceYears;
     private String departmentId;
+    private Double hourlyRate;
 
     // Fields for Clients
     private String contactNumber;

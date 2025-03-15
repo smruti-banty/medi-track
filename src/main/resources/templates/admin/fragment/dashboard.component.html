@@ -21,7 +21,7 @@
                 <i class="fas fa-user-md text-blue-500 text-3xl"></i>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-700">Total Doctors</h3>
-                    <p class="text-xl font-bold text-blue-600">120</p>
+                    <p class="text-xl font-bold text-blue-600" data-th-text="${totalDoctors}"></p>
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
                 <i class="fas fa-user-injured text-green-500 text-3xl"></i>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-700">Total Patients</h3>
-                    <p class="text-xl font-bold text-green-600">450</p>
+                    <p class="text-xl font-bold text-green-600" data-th-text="${totalClients}"></p>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
                 <i class="fas fa-clinic-medical text-purple-500 text-3xl"></i>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-700">Total Departments</h3>
-                    <p class="text-xl font-bold text-purple-600">15</p>
+                    <p class="text-xl font-bold text-purple-600" data-th-text="${totalDepartments}"></p>
                 </div>
             </div>
 
@@ -84,17 +84,12 @@
                     <span>New Users (Doctors/Clients)</span>
                 </h3>
                 <ul class="space-y-3">
-                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
-                        <span class="text-gray-700">Dr. Alex Johnson (Doctor)</span>
-                        <span class="text-sm text-gray-500">Joined: 2 days ago</span>
-                    </li>
-                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
-                        <span class="text-gray-700">Lisa Williams (Patient)</span>
-                        <span class="text-sm text-gray-500">Joined: 3 days ago</span>
-                    </li>
-                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
-                        <span class="text-gray-700">Dr. Emma Brown (Doctor)</span>
-                        <span class="text-sm text-gray-500">Joined: 4 days ago</span>
+                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center"
+                        data-th-each="user : ${recentUsers}">
+                        <span class="text-gray-700" data-th-text="|${user.name} (${user.userRole})|"></span>
+                        <span class="text-sm text-gray-500"
+                              data-th-text="|Joined: ${#temporals.format(user.createdDate, 'MMM dd, yyyy')}|">
+                        </span>
                     </li>
                 </ul>
             </div>

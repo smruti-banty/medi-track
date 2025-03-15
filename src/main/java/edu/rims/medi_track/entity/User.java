@@ -11,7 +11,7 @@ import lombok.Setter;
 @Table(name = "user")
 @Getter
 @Setter
-public class User {
+public class User extends  Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
