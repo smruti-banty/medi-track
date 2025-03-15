@@ -29,7 +29,7 @@
                 <img data-th-src="|/file/images/${department.id}|" alt="Cardiology" class="w-16 h-16 mx-auto mb-4">
                 <h4 class="text-lg font-semibold text-gray-700" data-th-text="${department.departmentName}"></h4>
                 <p class="text-gray-600 text-sm mt-2 flex-1" data-th-text="${department.departmentDescription}"></p>
-                <a href="#"
+                <a data-th-href="|doctors?departmentId=${department.id}|"
                    class="block mt-4 text-blue-500 font-semibold hover:underline text-center border-t pt-2">View Doctors</a>
             </div>
         </div>

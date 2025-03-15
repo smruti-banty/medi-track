@@ -5,5 +5,76 @@
 
 <div data-th-replace="~{fragment/client :: clientTemplate(~{client/fragment/doctor.component :: doctorContent})}"></div>
 
+<div id="doctorModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex justify-center items-center">
+    <!-- Modal Box -->
+    <div class="bg-white w-96 p-6 rounded shadow-lg">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center border-b pb-2 mb-4">
+            <h2 class="text-xl font-semibold">Doctor Details</h2>
+            <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">✖</button>
+        </div>
+
+        <!-- Doctor Information -->
+        <div class="space-y-3">
+            <div class="flex items-center">
+                <img id="doctorImage" class="w-16 h-16 rounded-full mr-3" src="https://via.placeholder.com/100" alt="Doctor">
+                <div>
+                    <p class="text-lg font-bold" id="doctorName">Dr. John Doe</p>
+                    <p class="text-gray-600" id="doctorSpecialization">Cardiologist</p>
+                </div>
+            </div>
+            <p><strong>Email:</strong> <span id="doctorEmail">johndoe@example.com</span></p>
+            <p><strong>Experience:</strong> <span id="doctorExperience">12 Years</span></p>
+            <p><strong>Hourly Rate:</strong> <span id="doctorRate">₹1500/hr</span></p>
+            <p><strong>License Number:</strong> <span id="doctorLicense">XYZ123456</span></p>
+            <p><strong>Address:</strong> <span id="doctorAddress">123, Medical Street, City</span></p>
+        </div>
+
+        <!-- Close Button -->
+        <div class="mt-4 flex justify-end">
+            <button onclick="closeModal()" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Close</button>
+        </div>
+    </div>
+</div>
+
+<div id="appointmentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex justify-center items-center">
+    <div class="bg-white w-96 p-6 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">Request an Appointment</h2>
+            <button onclick="closeAppointmentModal()" class="text-gray-500 hover:text-gray-700">&times;</button>
+        </div>
+
+        <!-- Appointment Form -->
+        <form id="appointmentForm">
+            <!-- Select Date -->
+            <div class="mb-3">
+                <label for="appointmentDate" class="block text-sm font-medium text-gray-700">Date</label>
+                <input type="date" id="appointmentDate" class="w-full border rounded px-3 py-2">
+            </div>
+
+            <!-- Select Time -->
+            <div class="mb-3">
+                <label for="appointmentTime" class="block text-sm font-medium text-gray-700">Time</label>
+                <input type="time" id="appointmentTime" class="w-full border rounded px-3 py-2">
+            </div>
+
+            <!-- Additional Notes -->
+            <div class="mb-3">
+                <label for="appointmentNotes" class="block text-sm font-medium text-gray-700">Notes (Optional)</label>
+                <textarea id="appointmentNotes" class="w-full border rounded px-3 py-2" rows="3" placeholder="Enter any additional details..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Request Appointment
+            </button>
+
+            <input type="hidden" name="doctorId" id="doctorIdField">
+            <input type="hidden" name="_csrf" data-th-value="${_csrf.token}">
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="/script/client.doctor.js"></script>
 </body>
 </html>
