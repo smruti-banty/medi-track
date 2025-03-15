@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block data-th-fragment="dashboardContent">
+    <div class="p-6 bg-gray-100">
+        <!-- Dashboard Heading -->
+        <h2 class="text-2xl font-semibold text-gray-700 flex items-center space-x-2 mb-6">
+            <i class="fas fa-chart-line text-blue-600"></i>
+            <span>Dashboard Details</span>
+        </h2>
+
+        <!-- Bunch of Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <!-- Total Doctors -->
+            <div class="bg-white p-4 rounded shadow flex items-center space-x-4">
+                <i class="fas fa-user-md text-blue-500 text-3xl"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Doctors</h3>
+                    <p class="text-xl font-bold text-blue-600">120</p>
+                </div>
+            </div>
+
+            <!-- Total Patients -->
+            <div class="bg-white p-4 rounded shadow flex items-center space-x-4">
+                <i class="fas fa-user-injured text-green-500 text-3xl"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Patients</h3>
+                    <p class="text-xl font-bold text-green-600">450</p>
+                </div>
+            </div>
+
+            <!-- Total Departments -->
+            <div class="bg-white p-4 rounded shadow flex items-center space-x-4">
+                <i class="fas fa-clinic-medical text-purple-500 text-3xl"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Departments</h3>
+                    <p class="text-xl font-bold text-purple-600">15</p>
+                </div>
+            </div>
+
+            <!-- Total Appointments -->
+            <div class="bg-white p-4 rounded shadow flex items-center space-x-4">
+                <i class="fas fa-calendar-check text-red-500 text-3xl"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Appointments</h3>
+                    <p class="text-xl font-bold text-red-600">320</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments & New Users Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Last 5 Appointments -->
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center space-x-2">
+                    <i class="fas fa-calendar-alt text-blue-600"></i>
+                    <span>Last 5 Appointments</span>
+                </h3>
+                <ul class="space-y-3">
+                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
+                        <span class="text-gray-700">John Doe (Dr. Smith)</span>
+                        <span class="text-sm text-gray-500">March 14, 2025</span>
+                    </li>
+                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
+                        <span class="text-gray-700">Jane Doe (Dr. Lee)</span>
+                        <span class="text-sm text-gray-500">March 13, 2025</span>
+                    </li>
+                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
+                        <span class="text-gray-700">Michael Scott (Dr. Brown)</span>
+                        <span class="text-sm text-gray-500">March 12, 2025</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Newly Registered Users -->
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center space-x-2">
+                    <i class="fas fa-user-plus text-green-600"></i>
+                    <span>New Users (Doctors/Clients)</span>
+                </h3>
+                <ul class="space-y-3">
+                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
+                        <span class="text-gray-700">Dr. Alex Johnson (Doctor)</span>
+                        <span class="text-sm text-gray-500">Joined: 2 days ago</span>
+                    </li>
+                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
+                        <span class="text-gray-700">Lisa Williams (Patient)</span>
+                        <span class="text-sm text-gray-500">Joined: 3 days ago</span>
+                    </li>
+                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
+                        <span class="text-gray-700">Dr. Emma Brown (Doctor)</span>
+                        <span class="text-sm text-gray-500">Joined: 4 days ago</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+</html>

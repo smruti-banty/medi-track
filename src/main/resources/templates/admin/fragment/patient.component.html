@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block data-th-fragment="patientContent">
+    <div class="p-6 bg-gray-100">
+        <!-- Page Header -->
+        <h2 class="text-2xl font-semibold text-gray-700 flex items-center space-x-2">
+            <i class="fas fa-users text-blue-600"></i>
+            <span>Patients</span>
+        </h2>
+
+        <!-- Timeline List -->
+        <div class="mt-6 space-y-6">
+            <!-- Patient Entry 1 -->
+            <div class="relative flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-200">
+                <!-- Patient Image -->
+                <img src="https://via.placeholder.com/80" alt="Patient" class="w-16 h-16 rounded-full border border-gray-300">
+
+                <!-- Patient Details (spread content) -->
+                <div class="flex-1 ml-4">
+                    <h3 class="text-lg font-semibold text-gray-700">John Doe</h3>
+                    <div class="grid grid-cols-2 gap-2 text-sm text-gray-500 mt-2">
+                        <p>Age: <span class="font-semibold">45</span></p>
+                        <p>Appointments: <span class="font-semibold">12</span></p>
+                        <p>Contact: <span class="font-semibold">+1 123 456 7890</span></p>
+                        <p>Email: <span class="font-semibold">johndoe@email.com</span></p>
+                        <p class="col-span-2">Address: <span class="font-semibold">123 Main St, New York, NY</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patient Entry 2 -->
+            <div class="relative flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-200">
+                <!-- Patient Image -->
+                <img src="https://via.placeholder.com/80" alt="Patient" class="w-16 h-16 rounded-full border border-gray-300">
+
+                <!-- Patient Details (spread content) -->
+                <div class="flex-1 ml-4">
+                    <h3 class="text-lg font-semibold text-gray-700">Jane Smith</h3>
+                    <div class="grid grid-cols-2 gap-2 text-sm text-gray-500 mt-2">
+                        <p>Age: <span class="font-semibold">30</span></p>
+                        <p>Appointments: <span class="font-semibold">8</span></p>
+                        <p>Contact: <span class="font-semibold">+1 987 654 3210</span></p>
+                        <p>Email: <span class="font-semibold">janesmith@email.com</span></p>
+                        <p class="col-span-2">Address: <span class="font-semibold">456 Elm St, Los Angeles, CA</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-6 flex justify-center">
+            <nav class="flex space-x-2">
+                <a href="#" class="px-3 py-1 border rounded bg-blue-500 text-white">1</a>
+                <a href="#" class="px-3 py-1 border rounded hover:bg-blue-500 hover:text-white">2</a>
+                <a href="#" class="px-3 py-1 border rounded hover:bg-blue-500 hover:text-white">3</a>
+                <a href="#" class="px-3 py-1 border rounded hover:bg-blue-500 hover:text-white">Next</a>
+            </nav>
+        </div>
+    </div>
+
+
+</th:block>
+
+</body>
+</html>

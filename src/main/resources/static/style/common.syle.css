@@ -1,0 +1,6 @@
+.active-link {
+    background-color: rgba(90, 178, 255, 0.2); /* Light transparent background */
+    border-left: 4px solid #5AB2FF; /* Solid left border */
+    border-radius: 0; /* Remove rounded corners */
+    padding-left: 12px; /* Adjust padding for alignment */
+}

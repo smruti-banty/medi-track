@@ -7,35 +7,9 @@
 
     <link data-th-replace="~{fragment/common :: commonLinks}">
 
-    <style>
-        .active-link {
-            background-color: rgba(90, 178, 255, 0.2); /* Light transparent background */
-            border-left: 4px solid #5AB2FF; /* Solid left border */
-            border-radius: 0; /* Remove rounded corners */
-            padding-left: 12px; /* Adjust padding for alignment */
-        }
-
-    </style>
-
     <script data-th-replace="~{fragment/common :: commonScripts}"></script>
 
-    <script >
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get current page URL
-            const currentPage = window.location.pathname;
-
-            // Get all sidebar links
-            const sidebarLinks = document.querySelectorAll("aside a");
-
-            sidebarLinks.forEach(link => {
-                // Compare link's href with current page URL
-                if (link.getAttribute("href") === currentPage) {
-                    link.classList.add("active-link"); // Add active class
-                }
-            });
-        });
-
-    </script>
+    <script src="/script/active.link.js"></script>
 
 </head>
 <body>
@@ -96,6 +70,8 @@
                     </svg>
                     <span>Logout</span>
                 </button>
+
+                <input type="hidden" name="_csrf" data-th-value="${_csrf.token}">
             </form>
 
             <!-- Slogan -->
@@ -112,7 +88,7 @@
 
             <!-- Right: Profile Image -->
             <a href="/client/profile" class="flex items-center space-x-3">
-                <img data-th-src="|/file/image/${clientId}|" alt="Profile Picture"
+                <img data-th-src="|/file/images/${clientId}|" alt="Profile Picture"
                      class="w-10 h-10 rounded-full border-2 border-white"/>
             </a>
         </header>

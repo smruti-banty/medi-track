@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="~{fragment/doctor :: head}"></head>
+
+<body>
+
+<script src="/script/doctor.profile.js"></script>
+
+<div data-th-replace="~{fragment/doctor :: doctorTemplate(~{doctor/fragment/profile.component :: profileContent}, 'fas fa-user-md', 'Doctor Profile & Settings')}"></div>
+
+</body>
+</html>

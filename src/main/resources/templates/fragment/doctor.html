@@ -8,9 +8,84 @@
     <link data-th-replace="~{fragment/common :: commonLinks}">
 
     <script data-th-replace="~{fragment/common :: commonScripts}"></script>
+
+    <script src="/script/active.link.js"></script>
 </head>
 
 <body>
+
+<aside data-th-fragment="doctorSidebar">
+    <div class="w-64 bg-white h-screen shadow-lg fixed">
+        <div class="p-4 text-center border-b">
+            <img src="/images/meditrack-icon.png" alt="Doctor" class="w-16 h-16 mx-auto rounded-full">
+            <h4 class="mt-2 font-semibold text-lg" data-th-text="|Dr. ${doctorName}|"></h4>
+        </div>
+        <nav class="mt-6">
+            <ul class="space-y-2">
+                <li><a href="/doctor/dashboard" class="block py-2 px-4 hover:bg-blue-100 rounded">🏠 Dashboard</a>
+                </li>
+                <li><a href="/doctor/appointments" class="block py-2 px-4 hover:bg-blue-100 rounded">📅
+                    Appointments</a>
+                </li>
+                <li><a href="/doctor/patients" class="block py-2 px-4 hover:bg-blue-100 rounded">👨‍⚕️ Patients</a>
+                </li>
+                <li><a href="/doctor/messages" class="block py-2 px-4 hover:bg-blue-100 rounded">💬 Messages</a></li>
+                <li><a href="/doctor/profile" class="block py-2 px-4 hover:bg-blue-100 rounded">⚙️ Profile</a></li>
+                <li>
+                    <form method="post" action="/logout" class="mt-2">
+                        <button class="block w-full py-2 px-4 text-left hover:bg-red-100 rounded">🚪 Logout</button>
+                        <input type="hidden" name="_csrf" data-th-value="${_csrf.token}">
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<!-- Header -->
+<header data-th-fragment="doctorHeader">
+    <div class="w-full bg-white shadow-md p-4 flex justify-between items-center">
+
+        <h2 class="text-xl font-semibold flex items-center">
+            <i data-th-class="|${iconClass} text-blue-600 mr-2|"></i>
+            <span data-th-text="${titleText}"></span>
+        </h2>
+
+        <div class="flex items-center space-x-4">
+            <a href="/doctor/messages" class="relative">
+                <i class="fas fa-bell text-xl text-gray-600"></i>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">3</span>
+            </a>
+            <a href="/doctor/profile" class="flex items-center space-x-2">
+                <img data-th-src="|/file/images/${doctorId}|" class="w-8 h-8 rounded-full">
+                <span class="font-semibold" data-th-text="|Dr.  ${doctorFirstName}|"></span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<!--  Layout to reuse  -->
+
+<div data-th-fragment="doctorTemplate(content, iconClass, titleText)" class="flex">
+    <!-- Sidebar -->
+    <div data-th-replace="~{ :: doctorSidebar}"></div>
+
+    <!-- Main Content -->
+    <div class="ml-64 p-6 w-full">
+        <!-- Header -->
+        <div data-th-replace="~{ :: doctorHeader}"></div>
+
+        <!-- Dynamic Page Content -->
+        <div data-th-replace="${content}"></div>
+
+        <!-- Footer -->
+        <!--        <div data-th-replace="~{ :: doctorFooter}"></div>-->
+    </div>
+</div>
+
+<footer data-th-fragment="doctorFooter" class="text-center py-4 text-gray-500 text-sm">
+    <p>© 2025 Your Clinic. All Rights Reserved.</p>
+</footer>
 
 </body>
 </html>

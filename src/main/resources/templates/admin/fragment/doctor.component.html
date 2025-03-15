@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block data-th-fragment="doctorContent">
+    <div class="p-6 bg-gray-100">
+        <!-- Page Header -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 flex items-center space-x-2">
+                <i class="fas fa-user-md text-blue-600"></i>
+                <span>Doctors</span>
+            </h2>
+        </div>
+
+        <!-- Doctor Table -->
+        <div class="bg-white p-4 rounded shadow">
+            <table class="w-full border-collapse">
+                <thead>
+                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left">Doctor</th>
+                    <th class="py-3 px-6 text-left">Email</th>
+                    <th class="py-3 px-6 text-left">Specialization</th>
+                    <th class="py-3 px-6 text-left">Experience</th>
+                    <th class="py-3 px-6 text-left">Hourly Rate</th>
+                </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm">
+                <!-- Doctor Row -->
+                <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer" onclick="toggleAccordion(this)">
+                    <td class="py-3 px-6 text-left flex items-center">
+                        <img class="w-10 h-10 rounded-full mr-2" src="https://via.placeholder.com/40" alt="Doctor">
+                        <span>Dr. John Doe</span>
+                    </td>
+                    <td class="py-3 px-6 text-left">john.doe@example.com</td>
+                    <td class="py-3 px-6 text-left">Cardiology</td>
+                    <td class="py-3 px-6 text-left">12 Years</td>
+                    <td class="py-3 px-6 text-left">$150/hr</td>
+                </tr>
+                <!-- Accordion Row -->
+                <tr class="hidden">
+                    <td colspan="6" class="p-4 bg-gray-50">
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <p><strong>Age:</strong> 45</p>
+                                <p><strong>License Number:</strong> LIC-123456</p>
+                            </div>
+                            <div>
+                                <p><strong>Specialization:</strong> Cardiology</p>
+                                <p><strong>Email:</strong> john.doe@example.com</p>
+                            </div>
+                            <div>
+                                <p><strong>Hourly Rate:</strong> $150/hr</p>
+                                <p><strong>Experience:</strong> 12 Years</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- More Doctors Dynamically Rendered -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-6">
+            <nav class="flex space-x-2">
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-angle-left"></i>
+                </button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">1</button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">2</button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">3</button>
+                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-angle-right"></i>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(row) {
+            const nextRow = row.nextElementSibling;
+            nextRow.classList.toggle("hidden");
+        }
+    </script>
+
+</th:block>
+
+</body>
+</html>

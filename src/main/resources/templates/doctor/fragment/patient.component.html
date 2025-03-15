@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block data-th-fragment="patientContent">
+    <div class="p-6 bg-gray-100">
+        <!-- Search Bar -->
+        <div class="mb-4">
+            <input type="text" placeholder="Search patient..."
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200">
+        </div>
+
+        <!-- Patient Cards -->
+        <div class="space-y-4">
+            <!-- Example Patient Card -->
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-between hover:shadow-lg">
+                <!-- Patient Image -->
+                <img src="/images/patient1.jpg" alt="Patient Image" class="w-14 h-14 rounded-full">
+
+                <!-- Patient Details -->
+                <div class="ml-4 flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800">John Doe</h4>
+                    <p class="text-sm text-gray-500">📅 March 20, 2025 | 🎂 Age: 32</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-4">
+                    <a href="#" title="Approve Appointment"
+                       class="text-green-500 text-xl hover:text-green-600">
+                        <i class="fas fa-check-circle"></i>
+                    </a>
+                    <a href="#" title="Deny Appointment"
+                       class="text-red-500 text-xl hover:text-red-600">
+                        <i class="fas fa-times-circle"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Repeat Patient Cards Dynamically -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-6 flex justify-center">
+            <button class="px-4 py-2 bg-gray-300 rounded-l hover:bg-gray-400">«</button>
+            <button class="px-4 py-2 bg-blue-600 text-white">1</button>
+            <button class="px-4 py-2 bg-gray-300 hover:bg-gray-400">2</button>
+            <button class="px-4 py-2 bg-gray-300 hover:bg-gray-400">3</button>
+            <button class="px-4 py-2 bg-gray-300 rounded-r hover:bg-gray-400">»</button>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+</html>
