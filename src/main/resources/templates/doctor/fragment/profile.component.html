@@ -27,27 +27,32 @@
 
             <!-- Non-Editable Information -->
             <div class="mb-6 p-4 bg-gray-50 rounded-lg">
-                <h3 class="text-xl font-semibold text-gray-800 text-center">Dr. John Doe</h3>
-                <p class="text-gray-600 text-sm text-center">johndoe@example.com</p>
+                <h3 class="text-xl font-semibold text-gray-800 text-center" data-th-text="|Dr. ${doctor.name}|"></h3>
+                <p class="text-gray-600 text-sm text-center" data-th-text="|${doctor.email}|"></p>
                 <div class="grid grid-cols-2 gap-4 mt-4">
                     <div>
                         <p class="text-gray-600 text-sm">Specialization</p>
-                        <p class="font-medium text-gray-800">Cardiologist</p>
+                        <p
+                                data-th-text="${doctor.department != null ? doctor.department.departmentName : null}"
+                                class="font-medium text-gray-800"></p>
                     </div>
                     <div>
                         <p class="text-gray-600 text-sm">License Number</p>
-                        <p class="font-medium text-gray-800">MD-123456</p>
+                        <p class="font-medium text-gray-800" data-th-text="${doctor.licenseNumber}"></p>
                     </div>
                 </div>
             </div>
 
             <!-- Editable Information -->
-            <form>
+            <form method="post" action="profile">
                 <!-- Hourly Rate -->
                 <div class="mb-4">
                     <label class="block text-gray-700 font-medium mb-2">Hourly Rate ($)</label>
-                    <input type="number" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="Enter hourly rate">
+                    <input type="number"
+                           class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           placeholder="Enter hourly rate"
+                            name="hourlyRate"
+                           data-th-value="${doctor.hourlyRate}">
                 </div>
 
                 <!-- Age & Experience -->
@@ -56,13 +61,14 @@
                         <label class="block text-gray-700 font-medium mb-2">Age</label>
                         <input type="number"
                                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                               placeholder="Enter age">
+                               placeholder="Enter age" name="age" data-th-value="${doctor.age}">
                     </div>
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Experience (Years)</label>
                         <input type="number"
                                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                               placeholder="Enter experience in years">
+                               placeholder="Enter experience in years" name="experienceYears"
+                               data-th-value="${doctor.experienceYears}">
                     </div>
                 </div>
 
@@ -70,15 +76,17 @@
                 <div class="mb-4">
                     <label class="block text-gray-700 font-medium mb-2">Address</label>
                     <textarea class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              placeholder="Enter your address"></textarea>
+                              placeholder="Enter your address" name="address"
+                            data-th-text="${doctor.address}"></textarea>
                 </div>
 
+                <input type="hidden" name="doctorId" data-th-value="${doctor.id}">
+                <input type="hidden" name="_csrf" data-th-value="${_csrf.token}">
                 <!-- Buttons -->
-                <div class="flex justify-between">
-                    <button type="button"
-                            class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400">Cancel</button>
+                <div class="flex justify-center">
                     <button type="submit"
-                            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Save Changes</button>
+                            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Save Changes
+                    </button>
                 </div>
             </form>
         </div>

@@ -16,7 +16,7 @@
                 <!-- Table Header -->
                 <thead class="bg-blue-600 text-white">
                 <tr>
-                    <th class="px-4 py-2 text-left">Date</th>
+                    <th class="px-4 py-2 text-left">Date &amp; Time</th>
                     <th class="px-4 py-2 text-left">Doctor</th>
                     <th class="px-4 py-2 text-left">Specialization</th>
                     <th class="px-4 py-2 text-left">Status</th>
@@ -27,21 +27,32 @@
                 <!-- Table Body -->
                 <tbody>
                 <tr data-th-each="appointment : ${appointments}" class="border-t">
-                    <td class="px-4 py-2" data-th-text="${appointment.date}"></td>
-                    <td class="px-4 py-2" data-th-text="${appointment.doctorName}"></td>
-                    <td class="px-4 py-2" data-th-text="${appointment.specialization}"></td>
+                    <td class="px-4 py-2"
+                        data-th-text="|${#temporals.format(appointment.appointmentDate, 'MMM dd yyyy')}, ${#temporals.format(appointment.appointmentTime, 'hh:mm a')}|"></td>
+                    <td class="px-4 py-2" data-th-text="${appointment.doctor.name}"></td>
+                    <td class="px-4 py-2"
+                        data-th-text="${appointment.doctor.department != null ? appointment.doctor.department.departmentName : '' }"></td>
                     <td class="px-4 py-2">
-                        <span data-th-classappend="${appointment.status == 'Upcoming' ? 'text-blue-600' :
-                                                   (appointment.status == 'Completed' ? 'text-green-600' :
-                                                   'text-red-600')}"
-                              class="font-semibold"
+                        <span class="font-semibold px-2 py-1 rounded-lg text-white"
+                              data-th-classappend="${appointment.status == 'PENDING' ? 'bg-blue-500' :
+                               (appointment.status == 'CONFIRMED' ? 'bg-green-500' :
+                               (appointment.status == 'CANCELLED' ? 'bg-red-500' :
+                               'bg-gray-500'))}"
                               data-th-text="${appointment.status}">
                         </span>
                     </td>
                     <td class="px-4 py-2 text-center space-x-2">
-                        <a href="#" class="text-blue-500 hover:underline">View</a>
-                        <a href="#" class="text-yellow-500 hover:underline">Edit</a>
-                        <a href="#" class="text-red-500 hover:underline">Cancel</a>
+                        <th:block data-th-if="${appointment.status.name() == 'PENDING'}">
+                            <a data-th-href="|appointment/cancel?appointmentId=${appointment.id}|"
+                               title="Cancel Appointment"
+                               class="text-red-500 text-2xl hover:text-red-600 transition-all duration-300">
+                                <i class="fas fa-times-circle"></i>
+                            </a>
+                        </th:block>
+
+                        <th:block data-th-if="${appointment.status.name() != 'PENDING'}">
+                            <i class="fas fa-times-circle text-gray-400 text-2xl cursor-not-allowed"></i>
+                        </th:block>
                     </td>
                 </tr>
                 </tbody>
@@ -49,12 +60,17 @@
         </div>
 
         <!-- Pagination -->
-        <div class="mt-4 flex justify-end space-x-2">
-            <a href="#" class="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400">« Prev</a>
-            <span class="px-3 py-2 bg-blue-600 text-white rounded">1</span>
-            <a href="#" class="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400">2</a>
-            <a href="#" class="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400">3</a>
-            <a href="#" class="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400">Next »</a>
+        <div class="mt-4 flex justify-between">
+            <a data-th-if="${currentPage > 0}"
+               data-th-href="@{/appointments(page=${currentPage - 1}, size=5)}"
+               class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">« Prev</a>
+
+            <span class="px-4 py-2 bg-blue-600 text-white rounded"
+                  data-th-text="'Page ' + (${currentPage} + 1) + ' of ' + ${totalPages}"></span>
+
+            <a data-th-if="${currentPage + 1 < totalPages}"
+               data-th-href="@{/appointments(page=${currentPage + 1}, size=5)}"
+               class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Next »</a>
         </div>
     </div>
 </th:block>

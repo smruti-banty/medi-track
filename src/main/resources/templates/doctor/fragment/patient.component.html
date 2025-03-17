@@ -16,41 +16,75 @@
 
         <!-- Patient Cards -->
         <div class="space-y-4">
-            <!-- Example Patient Card -->
-            <div class="bg-white p-4 rounded-lg shadow-md flex items-center justify-between hover:shadow-lg">
-                <!-- Patient Image -->
-                <img src="/images/patient1.jpg" alt="Patient Image" class="w-14 h-14 rounded-full">
+            <!-- Repeat Patient Cards Dynamically -->
+            <div data-th-each="appointment : ${appointments}"
+                 class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between hover:shadow-lg transition-all duration-300">
 
-                <!-- Patient Details -->
-                <div class="ml-4 flex-1">
-                    <h4 class="text-lg font-semibold text-gray-800">John Doe</h4>
-                    <p class="text-sm text-gray-500">📅 March 20, 2025 | 🎂 Age: 32</p>
+                <!-- Left: Patient Image -->
+                <div class="flex items-center space-x-4">
+                    <img data-th-src="|/file/images/${appointment.client.id}|"
+                         alt="Patient Image"
+                         class="w-16 h-16 rounded-full border-2 border-blue-400 shadow-sm">
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="flex space-x-4">
-                    <a href="#" title="Approve Appointment"
-                       class="text-green-500 text-xl hover:text-green-600">
+                <!-- Middle: Patient & Appointment Details -->
+                <div class="flex-1 ml-4">
+                    <h4 class="text-lg font-semibold text-gray-800" data-th-text="${appointment.client.name}">John
+                        Doe</h4>
+                    <p class="text-sm text-gray-500">
+                        📅 <span data-th-text="${#temporals.format(appointment.appointmentDate, 'MMMM dd, yyyy')}">March 20, 2025</span>
+                        |
+                        ⏰ <span
+                            data-th-text="${#temporals.format(appointment.appointmentTime, 'hh:mm a')}">10:00 AM</span>
+                        |
+                        🎂 Age: <span data-th-text="${appointment.client.age}">32</span>
+                    </p>
+
+                    <!-- Optional Notes Field -->
+                    <p data-th-if="${appointment.notes}"
+                       class="text-sm max-w-xl text-gray-600 mt-2 bg-gray-100 px-3 py-2 rounded-md">
+                        📝 <span data-th-text="${appointment.notes}"></span>
+                    </p>
+                </div>
+
+                <!-- Right: Action Buttons -->
+                <div class="flex space-x-3">
+                    <a
+                            data-th-href="|appointment/status-change?appointmentId=${appointment.id}&status=CONFIRMED|"
+                            title="Approve Appointment"
+                            class="text-green-500 text-2xl hover:text-green-600 transition-all duration-300">
                         <i class="fas fa-check-circle"></i>
                     </a>
-                    <a href="#" title="Deny Appointment"
-                       class="text-red-500 text-xl hover:text-red-600">
+                    <a data-th-href="|appointment/status-change?appointmentId=${appointment.id}&status=CANCELLED|"
+                       title="Deny Appointment"
+                       class="text-red-500 text-2xl hover:text-red-600 transition-all duration-300">
                         <i class="fas fa-times-circle"></i>
                     </a>
                 </div>
             </div>
-
-            <!-- Repeat Patient Cards Dynamically -->
         </div>
 
         <!-- Pagination -->
-        <div class="mt-6 flex justify-center">
-            <button class="px-4 py-2 bg-gray-300 rounded-l hover:bg-gray-400">«</button>
-            <button class="px-4 py-2 bg-blue-600 text-white">1</button>
-            <button class="px-4 py-2 bg-gray-300 hover:bg-gray-400">2</button>
-            <button class="px-4 py-2 bg-gray-300 hover:bg-gray-400">3</button>
-            <button class="px-4 py-2 bg-gray-300 rounded-r hover:bg-gray-400">»</button>
+        <div class="mt-6 flex justify-center" data-th-if="${totalPages > 1}">
+            <!-- Previous Page Button -->
+            <a data-th-if="${currentPage > 0}"
+               data-th-href="@{/appointments(page=${currentPage - 1})}"
+               class="px-4 py-2 bg-gray-300 rounded-l hover:bg-gray-400">«</a>
+
+            <!-- Page Numbers -->
+            <span data-th-each="pageNum : ${#numbers.sequence(0, totalPages - 1)}">
+        <a data-th-href="@{/appointments(page=${pageNum})}"
+           data-th-text="${pageNum + 1}"
+           data-th-classappend="${pageNum == currentPage} ? 'bg-blue-600 text-white' : 'bg-gray-300 hover:bg-gray-400'"
+           class="px-4 py-2 rounded"></a>
+    </span>
+
+            <!-- Next Page Button -->
+            <a data-th-if="${currentPage + 1 < totalPages}"
+               data-th-href="@{/appointments(page=${currentPage + 1})}"
+               class="px-4 py-2 bg-gray-300 rounded-r hover:bg-gray-400">»</a>
         </div>
+
     </div>
 
 </th:block>

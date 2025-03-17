@@ -1,11 +1,10 @@
 package edu.rims.medi_track.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -18,4 +17,7 @@ public class Client extends User {
 
     @Column(name = "address", columnDefinition = "text")
     private String address;
+
+    @OneToMany(mappedBy = "client")
+    private List<Appointment> appointments;
 }

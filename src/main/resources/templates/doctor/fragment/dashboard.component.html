@@ -15,7 +15,7 @@
                 <i class="fas fa-users text-blue-600 text-3xl"></i>
                 <div class="ml-4">
                     <h4 class="text-lg font-semibold text-gray-700">Total Patients</h4>
-                    <p class="text-2xl font-bold text-blue-800">320</p>
+                    <p class="text-2xl font-bold text-blue-800" data-th-text="${totalPatients}"></p>
                 </div>
             </div>
 
@@ -24,7 +24,7 @@
                 <i class="fas fa-calendar-alt text-green-600 text-3xl"></i>
                 <div class="ml-4">
                     <h4 class="text-lg font-semibold text-gray-700">Upcoming Appointments</h4>
-                    <p class="text-2xl font-bold text-green-800">8</p>
+                    <p class="text-2xl font-bold text-green-800" data-th-text="${upcomingAppointments}"></p>
                 </div>
             </div>
 
@@ -33,7 +33,9 @@
                 <i class="fas fa-dollar-sign text-yellow-600 text-3xl"></i>
                 <div class="ml-4">
                     <h4 class="text-lg font-semibold text-gray-700">Total Earnings</h4>
-                    <p class="text-2xl font-bold text-yellow-800">$4,200</p>
+                    <p class="text-2xl font-bold text-yellow-800"
+                       data-th-text="|₹ ${#numbers.formatDecimal(totalEarnings, 1, 'COMMA', 2, 'POINT')}|">
+                    </p>
                 </div>
             </div>
 
@@ -55,25 +57,11 @@
                     <i class="fas fa-calendar-check text-blue-600 mr-2"></i> Upcoming 5 Appointments
                 </h4>
                 <ul class="space-y-3">
-                    <li class="flex justify-between p-4 bg-gray-50 rounded-lg">
-                        <span class="text-gray-700">John Doe - General Checkup</span>
-                        <span class="text-gray-500">March 20, 10:30 AM</span>
-                    </li>
-                    <li class="flex justify-between p-4 bg-gray-50 rounded-lg">
-                        <span class="text-gray-700">Jane Smith - Eye Consultation</span>
-                        <span class="text-gray-500">March 21, 2:00 PM</span>
-                    </li>
-                    <li class="flex justify-between p-4 bg-gray-50 rounded-lg">
-                        <span class="text-gray-700">Robert Brown - Dental Checkup</span>
-                        <span class="text-gray-500">March 22, 11:15 AM</span>
-                    </li>
-                    <li class="flex justify-between p-4 bg-gray-50 rounded-lg">
-                        <span class="text-gray-700">Emily White - Skin Allergy</span>
-                        <span class="text-gray-500">March 23, 3:30 PM</span>
-                    </li>
-                    <li class="flex justify-between p-4 bg-gray-50 rounded-lg">
-                        <span class="text-gray-700">Michael Green - Orthopedic Check</span>
-                        <span class="text-gray-500">March 24, 9:00 AM</span>
+                    <li class="flex justify-between p-4 bg-gray-50 rounded-lg" data-th-each="appointment : ${appointments}">
+                        <span class="text-gray-700"
+                              data-th-text="|${appointment.client.name} - ${appointment.notes}|"></span>
+                        <span class="text-gray-500"
+                              data-th-text="|${#temporals.format(appointment.appointmentDate, 'MMM dd yyyy')}, ${#temporals.format(appointment.appointmentTime, 'hh:mm a')}|"></span>
                     </li>
                 </ul>
             </div>
@@ -84,30 +72,24 @@
                     <i class="fas fa-list text-gray-600 mr-2"></i> Last 5 Activities
                 </h4>
                 <ul class="space-y-3">
-                    <li class="flex items-center">
-                        <i class="fas fa-notes-medical text-blue-500"></i>
-                        <span class="ml-3">Checked test reports for John Doe</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-user-md text-green-500"></i>
-                        <span class="ml-3">Consulted Jane Smith for eye care</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-stethoscope text-blue-500"></i>
-                        <span class="ml-3">Completed a health checkup</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-calendar-alt text-yellow-500"></i>
-                        <span class="ml-3">Rescheduled an appointment</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-comments text-gray-500"></i>
-                        <span class="ml-3">Received feedback from a patient</span>
+                    <li data-th-each="activity : ${activities}" class="flex items-center">
+                        <th:block th:replace="::getActivityIcon(${activity.activityType.name()})"></th:block>
+                        <span class="ml-3" data-th-text="${activity.description}"></span>
                     </li>
                 </ul>
+
             </div>
         </div>
     </div>
+</th:block>
+
+<th:block data-th-fragment="getActivityIcon(activity)" data-th-switch="${activity}">
+    <i data-th-case="'COMPLETED_APPOINTMENT'" class="fas fa-stethoscope text-blue-500"></i>
+    <i data-th-case="'CONFIRMED_APPOINTMENT'" class="fas fa-calendar-check text-green-500"></i>
+    <i data-th-case="'CANCELED_APPOINTMENT'" class="fas fa-calendar-times text-red-500"></i>
+    <i data-th-case="'UPDATED_PROFILE'" class="fas fa-user-edit text-yellow-500"></i>
+    <i data-th-case="'REVIEWED_DOCTOR'" class="fas fa-star text-gray-500"></i>
+    <i data-th-case="*" class="fas fa-question-circle text-gray-400"></i> <!-- Default icon -->
 </th:block>
 
 </body>

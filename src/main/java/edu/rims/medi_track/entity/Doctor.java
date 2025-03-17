@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "doctor")
 @PrimaryKeyJoinColumn(name = "id")
@@ -27,6 +29,9 @@ public class Doctor extends User {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
