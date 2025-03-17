@@ -29,7 +29,7 @@
                 </li>
                 <li><a href="/doctor/patients" class="block py-2 px-4 hover:bg-blue-100 rounded">👨‍⚕️ Patients</a>
                 </li>
-                <li><a href="/doctor/messages" class="block py-2 px-4 hover:bg-blue-100 rounded">💬 Messages</a></li>
+<!--                <li><a href="/doctor/messages" class="block py-2 px-4 hover:bg-blue-100 rounded">💬 Messages</a></li>-->
                 <li><a href="/doctor/profile" class="block py-2 px-4 hover:bg-blue-100 rounded">⚙️ Profile</a></li>
                 <li>
                     <form method="post" action="/logout" class="mt-2">
@@ -52,9 +52,9 @@
         </h2>
 
         <div class="flex items-center space-x-4">
-            <a href="/doctor/messages" class="relative">
+            <a href="/doctor/patients" class="relative">
                 <i class="fas fa-bell text-xl text-gray-600"></i>
-                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">3</span>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full" data-th-text="${totalNotification}"></span>
             </a>
             <a href="/doctor/profile" class="flex items-center space-x-2">
                 <img data-th-src="|/file/images/${doctorId}|" class="w-8 h-8 rounded-full">

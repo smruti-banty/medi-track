@@ -1,0 +1,10 @@
+package edu.rims.medi_track.constants;
+
+public enum ActivityType {
+    SCHEDULED_APPOINTMENT,
+    COMPLETED_APPOINTMENT,
+    CONFIRMED_APPOINTMENT,
+    CANCELED_APPOINTMENT,
+    UPDATED_PROFILE,
+    REVIEWED_DOCTOR
+}

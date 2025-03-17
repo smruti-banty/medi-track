@@ -45,23 +45,23 @@
         </div>
 
         <!-- Appointment Form -->
-        <form id="appointmentForm">
+        <form id="appointmentForm" method="post" action="appointments">
             <!-- Select Date -->
             <div class="mb-3">
                 <label for="appointmentDate" class="block text-sm font-medium text-gray-700">Date</label>
-                <input type="date" id="appointmentDate" class="w-full border rounded px-3 py-2">
+                <input type="date" id="appointmentDate" name="appointmentDate" class="w-full border rounded px-3 py-2">
             </div>
 
             <!-- Select Time -->
             <div class="mb-3">
                 <label for="appointmentTime" class="block text-sm font-medium text-gray-700">Time</label>
-                <input type="time" id="appointmentTime" class="w-full border rounded px-3 py-2">
+                <input type="time" id="appointmentTime" name="appointmentTime" class="w-full border rounded px-3 py-2">
             </div>
 
             <!-- Additional Notes -->
             <div class="mb-3">
                 <label for="appointmentNotes" class="block text-sm font-medium text-gray-700">Notes (Optional)</label>
-                <textarea id="appointmentNotes" class="w-full border rounded px-3 py-2" rows="3" placeholder="Enter any additional details..."></textarea>
+                <textarea id="appointmentNotes" name="notes" class="w-full border rounded px-3 py-2" rows="3" placeholder="Enter any additional details..."></textarea>
             </div>
 
             <!-- Submit Button -->

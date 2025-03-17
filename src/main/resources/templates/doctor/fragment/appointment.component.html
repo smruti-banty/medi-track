@@ -10,22 +10,91 @@
     <table class="w-full bg-white shadow-md rounded-lg">
         <thead>
         <tr class="bg-blue-500 text-white">
-            <th class="py-2 px-4">Patient Name</th>
-            <th class="py-2 px-4">Date</th>
-            <th class="py-2 px-4">Time</th>
-            <th class="py-2 px-4">Status</th>
+            <th class="py-2 px-4 text-left">Patient Name</th>
+            <th class="py-2 px-4 text-left">Date</th>
+            <th class="py-2 px-4 text-left">Time</th>
+            <th class="py-2 px-4 text-left">Status</th>
+            <th class="py-2 px-4">Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="border-b">
-            <td class="py-2 px-4">John Doe</td>
-            <td class="py-2 px-4">March 20, 2025</td>
-            <td class="py-2 px-4">10:00 AM</td>
-            <td class="py-2 px-4 text-green-600">Confirmed</td>
+        <tr data-th-each="appointment : ${appointments}" class="border-b">
+            <!-- Patient Name -->
+            <td class="py-2 px-4" data-th-text="${appointment.client.name}"></td>
+
+            <!-- Appointment Date -->
+            <td class="py-2 px-4"
+                data-th-text="${#temporals.format(appointment.appointmentDate, 'MMMM dd, yyyy')}"></td>
+
+            <!-- Appointment Time -->
+            <td class="py-2 px-4" data-th-text="${#temporals.format(appointment.appointmentTime, 'hh:mm a')}"></td>
+
+            <!-- Status -->
+            <td class="py-2 px-4">
+                <span class="font-semibold py-1 rounded-lg"
+                      data-th-with="status=${appointment.status.name()}"
+                      data-th-classappend="${status == 'PENDING' ? 'text-blue-500' :
+                           (status == 'CONFIRMED' ? 'text-green-500' :
+                           (status == 'CANCELLED' ? 'text-red-500' :
+                           'text-gray-500'))}"
+                      data-th-text="${status}">
+                </span>
+            </td>
+
+            <!-- Action -->
+            <td class="py-2 px-4 text-center">
+                <span data-th-if="${appointment.status.name() == 'CONFIRMED'}">
+                    <a data-th-href="|appointment/status-change?appointmentId=${appointment.id}&status=COMPLETED|"
+                       title="Mark as Completed"
+                       class="text-blue-500 hover:text-blue-600 transition-all duration-300">
+                        <i class="fas fa-check-circle"></i>
+                    </a>
+                </span>
+
+                <span data-th-if="${appointment.status.name() != 'CONFIRMED'}"
+                      class="text-gray-400 cursor-not-allowed">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+            </td>
         </tr>
         </tbody>
     </table>
 
+    <!-- Pagination Controls -->
+    <div class="mt-6 flex justify-center space-x-1 items-center">
+        <!-- Previous Button -->
+        <a data-th-if="${currentPage > 1}"
+           data-th-href="@{/appointments(page=${currentPage - 1})}"
+           class="px-4 py-2 bg-gray-300 rounded-l hover:bg-gray-400 flex items-center justify-center">
+            «
+        </a>
+        <span data-th-if="${currentPage == 1}"
+              class="px-4 py-2 bg-gray-200 rounded-l cursor-not-allowed flex items-center justify-center">
+        «
+    </span>
+
+        <!-- Page Numbers -->
+        <span class="flex items-center">
+        <span data-th-each="i : ${#numbers.sequence(1, totalPages)}">
+            <a data-th-href="@{/appointments(page=${i})}"
+               data-th-text="${i}"
+               data-th-classappend="${currentPage == i ? 'bg-blue-600 text-white' : 'bg-gray-300 hover:bg-gray-400'}"
+               class="px-4 py-2 flex items-center justify-center">
+            </a>
+        </span>
+    </span>
+
+        <!-- Next Button -->
+        <a data-th-if="${currentPage < totalPages}"
+           data-th-href="@{/appointments(page=${currentPage + 1})}"
+           class="px-4 py-2 bg-gray-300 rounded-r hover:bg-gray-400 flex items-center justify-center">
+            »
+        </a>
+        <span data-th-if="${currentPage == totalPages}"
+              class="px-4 py-2 bg-gray-200 rounded-r cursor-not-allowed flex items-center justify-center">
+        »
+    </span>
+    </div>
 </th:block>
 
 </body>
