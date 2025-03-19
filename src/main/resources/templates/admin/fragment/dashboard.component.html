@@ -48,7 +48,7 @@
                 <i class="fas fa-calendar-check text-red-500 text-3xl"></i>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-700">Total Appointments</h3>
-                    <p class="text-xl font-bold text-red-600">320</p>
+                    <p class="text-xl font-bold text-red-600" data-th-text="${totalAppointments}"></p>
                 </div>
             </div>
         </div>
@@ -62,17 +62,17 @@
                     <span>Last 5 Appointments</span>
                 </h3>
                 <ul class="space-y-3">
-                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
-                        <span class="text-gray-700">John Doe (Dr. Smith)</span>
-                        <span class="text-sm text-gray-500">March 14, 2025</span>
-                    </li>
-                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
-                        <span class="text-gray-700">Jane Doe (Dr. Lee)</span>
-                        <span class="text-sm text-gray-500">March 13, 2025</span>
-                    </li>
-                    <li class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
-                        <span class="text-gray-700">Michael Scott (Dr. Brown)</span>
-                        <span class="text-sm text-gray-500">March 12, 2025</span>
+                    <li data-th-each="appointment : ${appointments}" class="p-3 bg-gray-50 rounded shadow flex justify-between items-center">
+                        <div>
+                            <span class="text-gray-700 font-medium" data-th-text="${appointment.client.name} + ' (' + ${appointment.doctor.name} + ')'"></span>
+                            <div class="text-sm text-gray-500" data-th-text="${#temporals.format(appointment.appointmentDate, 'MMMM dd, yyyy')}"></div>
+                            <div class="text-xs font-medium mt-1" data-th-with="status = ${appointment.status.name()}">
+                                <span class="px-2 py-1 rounded text-white"
+                                      data-th-classappend="${status == 'CONFIRMED' ? 'bg-green-500' : (status == 'CANCELLED' ? 'bg-red-500' : 'bg-yellow-500')}"
+                                      data-th-text="${status}"></span>
+                            </div>
+                        </div>
+                        <span class="text-sm font-semibold text-blue-600" data-th-text="'₹' + ${appointment.doctorFee}"></span>
                     </li>
                 </ul>
             </div>

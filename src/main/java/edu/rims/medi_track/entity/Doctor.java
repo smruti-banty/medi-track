@@ -26,6 +26,9 @@ public class Doctor extends User {
     @Column(name = "address", columnDefinition = "text")
     private String address;
 
+    @Column(name = "is_specialist")
+    private Boolean isSpecialist;
+
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;

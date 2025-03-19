@@ -65,25 +65,12 @@
         <div class="bg-white p-6 rounded-lg shadow-md">
             <h4 class="text-lg font-semibold text-gray-700 mb-4">Our Specialist Consultants</h4>
             <div class="space-y-4">
-                <div class="flex items-center">
-                    <img src="/images/doctor1.jpg" alt="Dr. John Doe" class="w-12 h-12 rounded-full">
+                <div class="flex items-center" data-th-each="doctor : ${doctors}">
+                    <img data-th-src="|/file/images/${doctor.id}|" data-th-alt="|Dr. ${doctor.name}|" class="w-12 h-12 rounded-full">
                     <div class="ml-4">
-                        <h5 class="text-md font-semibold">Dr. John Doe</h5>
-                        <p class="text-sm text-gray-500">Cardiologist</p>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <img src="/images/doctor2.jpg" alt="Dr. Emily Smith" class="w-12 h-12 rounded-full">
-                    <div class="ml-4">
-                        <h5 class="text-md font-semibold">Dr. Emily Smith</h5>
-                        <p class="text-sm text-gray-500">Dermatologist</p>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <img src="/images/doctor3.jpg" alt="Dr. Michael Brown" class="w-12 h-12 rounded-full">
-                    <div class="ml-4">
-                        <h5 class="text-md font-semibold">Dr. Michael Brown</h5>
-                        <p class="text-sm text-gray-500">Orthopedic</p>
+                        <h5 class="text-md font-semibold" data-th-text="|Dr. ${doctor.name}|"></h5>
+                        <p class="text-sm text-gray-500"
+                           data-th-text="${doctor.department != null ? doctor.department.departmentName : null}"></p>
                     </div>
                 </div>
             </div>

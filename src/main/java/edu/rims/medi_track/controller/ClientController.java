@@ -53,6 +53,7 @@ public class ClientController {
         model.addAttribute("completedAppointments", appointmentService.countClientCompleteAppointments(clientId));
         model.addAttribute("cancelAppointments", appointmentService.countClientCancelAppointments(clientId));
         model.addAttribute("activities", activityService.getRecent5Activities(clientId));
+        model.addAttribute("doctors", doctorService.getSpecialists());
 
         return String.format(FRONTEND_PREFIX, "home");
     }

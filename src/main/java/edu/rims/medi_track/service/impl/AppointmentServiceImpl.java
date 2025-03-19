@@ -156,6 +156,21 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.countByClientIdAndStatus(clientId, AppointmentStatus.CONFIRMED);
     }
 
+    @Override
+    public long countAll() {
+        return appointmentRepository.count();
+    }
+
+    @Override
+    public List<Appointment> getLast5Appointments() {
+        return appointmentRepository.findTop5ByOrderByCreatedDateDesc();
+    }
+
+    @Override
+    public Page<Appointment> getAppointments(Pageable pageable) {
+        return appointmentRepository.findAll(pageable);
+    }
+
     private ActivityType activityTypeFromStatus(AppointmentStatus status) {
         return switch (status) {
             case PENDING -> ActivityType.SCHEDULED_APPOINTMENT;

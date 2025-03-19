@@ -42,4 +42,9 @@ public interface AppointmentService {
 
     long countClientConfirmAppointments(String clientId);
 
+    long countAll();
+
+    List<Appointment> getLast5Appointments();
+
+    Page<Appointment> getAppointments(Pageable pageable);
 }
