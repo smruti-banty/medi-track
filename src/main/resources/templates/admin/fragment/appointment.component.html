@@ -17,15 +17,17 @@
         </div>
 
         <!-- Search & Filter -->
-        <div class="bg-white p-4 rounded shadow mb-4 flex justify-between">
-            <input type="text" placeholder="Search by Patient Name..." class="border p-2 rounded w-1/3">
-            <select class="border p-2 rounded">
-                <option value="">Filter by Status</option>
-                <option value="scheduled">Scheduled</option>
-                <option value="completed">Completed</option>
-                <option value="canceled">Canceled</option>
-            </select>
-        </div>
+<!--        <form method="get" action="/appointments" class="bg-white p-4 rounded shadow mb-4 flex justify-between">-->
+<!--            <input type="text" name="search" data-th-value="${param.search}" placeholder="Search by Patient Name..."-->
+<!--                   class="border p-2 rounded w-1/3">-->
+<!--            <select name="status" class="border p-2 rounded">-->
+<!--                <option value="">Filter by Status</option>-->
+<!--                <option value="scheduled" data-th-selected="${param.status == 'scheduled'}">Scheduled</option>-->
+<!--                <option value="completed" data-th-selected="${param.status == 'completed'}">Completed</option>-->
+<!--                <option value="canceled" data-th-selected="${param.status == 'canceled'}">Canceled</option>-->
+<!--            </select>-->
+<!--            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Filter</button>-->
+<!--        </form>-->
 
         <!-- Appointments DataTable -->
         <div class="bg-white p-4 rounded shadow">
@@ -39,19 +41,23 @@
                 </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm">
-                <!-- Sample Row -->
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                <tr data-th-each="appointment : ${appointments}" class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left flex items-center">
-                        <img class="w-10 h-10 rounded-full mr-2" src="https://via.placeholder.com/40" alt="Patient">
-                        <span>John Doe</span>
+                        <img class="w-10 h-10 rounded-full mr-2" data-th-src="|/file/images/${appointment.client.id}|" alt="Patient">
+                        <span data-th-text="${appointment.client.name}"></span>
                     </td>
-                    <td class="py-3 px-6 text-left">Dr. Smith</td>
-                    <td class="py-3 px-6 text-left">March 20, 2025 - 10:00 AM</td>
                     <td class="py-3 px-6 text-left">
-                        <span class="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded">Scheduled</span>
+                        <span data-th-text="${appointment.doctor.name}"></span>
+                    </td>
+                    <td class="py-3 px-6 text-left" data-th-text="${#temporals.format(appointment.appointmentDate, 'MMMM dd, yyyy - hh:mm a')}"></td>
+                    <td class="py-3 px-6 text-left">
+                    <span data-th-classappend="${appointment.status == 'scheduled' ? 'bg-green-200 text-green-800'
+                                            : appointment.status == 'completed' ? 'bg-blue-200 text-blue-800'
+                                            : 'bg-red-200 text-red-800'}"
+                          class="text-xs font-semibold px-2 py-1 rounded"
+                          data-th-text="${appointment.status}"></span>
                     </td>
                 </tr>
-                <!-- More Rows Dynamically Rendered -->
                 </tbody>
             </table>
         </div>
@@ -59,15 +65,15 @@
         <!-- Pagination -->
         <div class="flex justify-center mt-6">
             <nav class="flex space-x-2">
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
+                <a data-th-if="${currentPage > 0}" data-th-href="@{/appointments(page=${currentPage - 1}, size=5, search=${param.search}, status=${param.status})}"
+                   class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
                     <i class="fas fa-angle-left"></i>
-                </button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">1</button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">2</button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">3</button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
+                </a>
+                <span data-th-text="'Page ' + ${currentPage + 1} + ' of ' + ${totalPages}" class="text-gray-600"></span>
+                <a data-th-if="${currentPage < totalPages - 1}" data-th-href="@{/appointments(page=${currentPage + 1}, size=5, search=${param.search}, status=${param.status})}"
+                   class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
                     <i class="fas fa-angle-right"></i>
-                </button>
+                </a>
             </nav>
         </div>
     </div>

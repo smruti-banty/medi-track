@@ -30,4 +30,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, String
     List<Appointment> findTop5ByDoctorIdAndStatusOrderByCreatedDateDesc(String doctorId, AppointmentStatus status);
 
     List<Appointment> findTop5ByClientIdAndStatusOrderByCreatedDateDesc(String clientId, AppointmentStatus status);
+
+    List<Appointment> findTop5ByOrderByCreatedDateDesc();
 }

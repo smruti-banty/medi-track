@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
@@ -62,6 +64,18 @@ public class DoctorServiceImpl implements DoctorService {
         activitiy.setActivityType(ActivityType.UPDATED_PROFILE);
         activitiy.setDescription("Update profile");
         activityRepository.save(activitiy);
+    }
+
+    @Override
+    public void makeSpecialist(String doctorId) {
+        var doctor = doctorRepository.findById(doctorId).orElseThrow();
+        doctor.setIsSpecialist(true);
+        doctorRepository.save(doctor);
+    }
+
+    @Override
+    public List<Doctor> getSpecialists() {
+        return doctorRepository.findTop5ByIsSpecialist(true);
     }
 
 }

@@ -24,23 +24,36 @@
                     <th class="py-3 px-6 text-left">Doctor</th>
                     <th class="py-3 px-6 text-left">Email</th>
                     <th class="py-3 px-6 text-left">Specialization</th>
-                    <th class="py-3 px-6 text-left">Experience</th>
+                    <th class="py-3 px-6 text-left">Specialist</th>
                     <th class="py-3 px-6 text-left">Hourly Rate</th>
+                    <th class="py-3 px-6 text-left">Action</th>
                 </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm">
                 <!-- Doctor Row -->
                 <th:block data-th-each="doctor : ${doctors}">
-                    <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer" onclick="toggleAccordion(this)">
+                    <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer"
+                        onclick="toggleAccordion(this)">
                         <td class="py-3 px-6 text-left flex items-center">
-                            <img class="w-10 h-10 rounded-full mr-2" data-th-src="|/file/images/${doctor.id}|" alt="Doctor">
+                            <img class="w-10 h-10 rounded-full mr-2" data-th-src="|/file/images/${doctor.id}|"
+                                 alt="Doctor">
                             <span data-th-text="${doctor.name}"></span>
                         </td>
                         <td class="py-3 px-6 text-left" data-th-text="${doctor.email}"></td>
                         <td class="py-3 px-6 text-left"
                             data-th-text="${doctor.department != null ? doctor.department.departmentName : ''}"></td>
-                        <td class="py-3 px-6 text-left" data-th-text="|${doctor.experienceYears} Years|"></td>
+                        <td class="py-3 px-6 text-left" data-th-text="|${doctor.isSpecialist ? 'YES' : 'NO'}|"></td>
                         <td class="py-3 px-6 text-left" data-th-text="|&#8377;${doctor.hourlyRate}/hr|"></td>
+                        <td class="py-3 px-6 text-left">
+                            <!-- Show link if not specialist -->
+                            <a data-th-if="${!doctor.isSpecialist}"
+                               data-th-href="|doctors/specialist?doctorId=${doctor.id}|"
+                               class="text-blue-500 text-xs font-semibold hover:underline">
+                                Mark as Specialist
+                            </a>
+                            <p data-th-if="${doctor.isSpecialist}">Already specialist</p>
+                        </td>
+
                     </tr>
                     <!-- Accordion Row -->
                     <tr class="hidden">
@@ -48,15 +61,20 @@
                             <div class="grid grid-cols-3 gap-4">
                                 <div>
                                     <p><strong>Age:</strong> <span data-th-text="${doctor.age}"></span></p>
-                                    <p><strong>License Number:</strong> <span data-th-text="${doctor.licenseNumber}"></span></p>
+                                    <p><strong>License Number:</strong> <span
+                                            data-th-text="${doctor.licenseNumber}"></span></p>
                                 </div>
                                 <div>
-                                    <p><strong>Specialization:</strong> <span data-th-text="${doctor.department != null ? doctor.department.departmentName : ''}"></span></p>
+                                    <p><strong>Specialization:</strong> <span
+                                            data-th-text="${doctor.department != null ? doctor.department.departmentName : ''}"></span>
+                                    </p>
                                     <p><strong>Email:</strong> <span data-th-text="${doctor.email}"></span></p>
                                 </div>
                                 <div>
-                                    <p><strong>Hourly Rate:</strong> <span data-th-text="|&#8377;${doctor.hourlyRate}/hr|"></span></p>
-                                    <p><strong>Experience:</strong> <span data-th-text="|${doctor.experienceYears} Years|"></span></p>
+                                    <p><strong>Hourly Rate:</strong> <span
+                                            data-th-text="|&#8377;${doctor.hourlyRate}/hr|"></span></p>
+                                    <p><strong>Experience:</strong> <span
+                                            data-th-text="|${doctor.experienceYears} Years|"></span></p>
                                 </div>
                             </div>
                         </td>
@@ -68,21 +86,32 @@
 
         <!-- Pagination -->
         <div class="flex justify-center mt-6">
-            <nav class="flex space-x-2">
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
+            <nav class="flex items-center space-x-2">
+                <!-- Previous Button -->
+                <a data-th-href="@{/doctors(page=${currentPage - 1}, size=${size})}"
+                   data-th-classappend="${currentPage == 0} ? 'pointer-events-none opacity-50 cursor-not-allowed'"
+                   class="flex items-center justify-center w-10 h-10 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
                     <i class="fas fa-angle-left"></i>
-                </button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">1
-                </button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">2
-                </button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">3
-                </button>
-                <button class="px-3 py-2 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
+                </a>
+
+                <!-- Page Numbers -->
+                <span data-th-each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a data-th-href="@{/doctors(page=${i}, size=${size})}"
+               data-th-classappend="${i == currentPage} ? 'bg-blue-500 text-white' : 'text-gray-600 bg-white'"
+               class="flex items-center justify-center w-10 h-10 border rounded hover:bg-blue-500 hover:text-white"
+               data-th-text="${i + 1}">
+            </a>
+        </span>
+
+                <!-- Next Button -->
+                <a data-th-href="@{/doctors(page=${currentPage + 1}, size=${size})}"
+                   data-th-classappend="${currentPage == totalPages - 1} ? 'pointer-events-none opacity-50 cursor-not-allowed'"
+                   class="flex items-center justify-center w-10 h-10 border rounded text-gray-600 bg-white hover:bg-blue-500 hover:text-white">
                     <i class="fas fa-angle-right"></i>
-                </button>
+                </a>
             </nav>
         </div>
+
     </div>
 
     <script>
