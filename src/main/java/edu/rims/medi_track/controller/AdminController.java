@@ -3,6 +3,8 @@ package edu.rims.medi_track.controller;
 import edu.rims.medi_track.constants.UserRole;
 import edu.rims.medi_track.dto.AdminRegistrationDTO;
 import edu.rims.medi_track.dto.DepartmentDTO;
+import edu.rims.medi_track.dto.DepartmentResponseDTO;
+import edu.rims.medi_track.entity.Department;
 import edu.rims.medi_track.entity.User;
 import edu.rims.medi_track.service.AppointmentService;
 import edu.rims.medi_track.service.DepartmentService;
@@ -130,5 +132,19 @@ public class AdminController {
     String createDepartment(@ModelAttribute DepartmentDTO dto) {
         departmentService.createDepartment(dto);
         return String.format(ADMIN_BASE_URL, "/departments");
+    }
+
+    @GetMapping("/departments/delete")
+    String removeDepartment(@RequestParam String departmentId) {
+        departmentService.removeDepartmentById(departmentId);
+        return String.format(ADMIN_BASE_URL, "/departments");
+    }
+
+    @GetMapping("/departments/{id}")
+    @ResponseBody
+    DepartmentResponseDTO getDepartment(@PathVariable String id) {
+        var department = departmentService.getDepartmentById(id).orElseThrow();
+        return new DepartmentResponseDTO(department.getId(),
+                department.getDepartmentName(), department.getDepartmentDescription());
     }
 }

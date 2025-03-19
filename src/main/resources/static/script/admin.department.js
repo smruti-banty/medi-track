@@ -36,8 +36,29 @@ function removeImage() {
     previewContainer.classList.add('hidden'); // Hide preview & remove button
 }
 
-function openModal() {
-    document.getElementById('addDepartmentModal').classList.remove('hidden');
+async function openModal(departmentId=null) {
+   const addDepartmentModal =  document.getElementById('addDepartmentModal');
+   const addDepartmentForm = addDepartmentModal.querySelector('form');
+
+    if (departmentId !=null) {
+        const response = await fetch(`/admin/departments/${departmentId}`).catch(err => console.err(err));
+        const department = await response.json();
+
+        const fields = addDepartmentForm.querySelectorAll("input,textarea");
+        const map = new Map();
+        for (const field of fields) {
+            map.set(field.name, field);
+        }
+
+        for (let key in department) {
+            const field = map.get(key);
+            field.value = department[key];
+        }
+    } else {
+        addDepartmentForm.reset();
+    }
+
+    addDepartmentModal.classList.remove('hidden');
 }
 
 function closeModal() {

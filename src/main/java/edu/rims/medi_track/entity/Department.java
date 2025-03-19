@@ -29,4 +29,13 @@ public class Department {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE;
+
+    public void removeDepartment() {
+        if (doctors != null) {
+            for (var doctor : doctors) {
+                doctor.setDepartment(null);
+            }
+            doctors = null;
+        }
+    }
 }

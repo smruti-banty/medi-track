@@ -27,4 +27,6 @@ public interface DepartmentService {
     Department updateDepartmentStatus(String id, Status status);
 
     long departments();
+
+    void removeDepartmentById(String departmentId);
 }

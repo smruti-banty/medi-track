@@ -46,7 +46,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<Department> getDepartments() {
-        return departmentRepository.findAll();
+        return departmentRepository.findByStatus(Status.ACTIVE);
     }
 
     @Override
@@ -77,5 +77,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public long departments() {
         return departmentRepository.count();
+    }
+
+    @Override
+    public void removeDepartmentById(String departmentId) {
+        var department = departmentRepository.findById(departmentId).orElseThrow();
+        department.removeDepartment();
+        departmentRepository.delete(department);
     }
 }
